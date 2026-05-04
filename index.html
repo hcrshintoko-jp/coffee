@@ -1289,7 +1289,7 @@
      ========================================================= -->
 <section id="top" class="hero">
   <div class="hero-media">
-    <video autoplay muted loop playsinline poster="images/hero-poster.png">
+    <video autoplay muted loop playsinline poster="images/hero-poster.jpg">
       <source src="images/hero.webm" type="video/webm" />
       <source src="images/hero.mp4" type="video/mp4" />
     </video>
@@ -1355,7 +1355,7 @@
 
       <article class="way-card reveal">
         <div class="img-slot way-card-img aspect-4-3" data-fallback="[ STEP 01 ・ 焙煎豆ボトル ]">
-          <img src="images/way-01.png" alt="フレッシュな豆を、買う" loading="lazy" />
+          <img src="images/way-01.jpg" alt="フレッシュな豆を、買う" loading="lazy" />
         </div>
         <div class="way-card-body">
           <p class="way-card-step">STEP 01</p>
@@ -1456,7 +1456,7 @@
 
     <div id="starter" class="starter reveal">
       <div class="img-slot starter-img aspect-16-10" data-fallback="[ STARTER ・ 3種お試しセット ]">
-        <img src="images/starter.png" alt="3種お試しセット" loading="lazy" />
+        <img src="images/starter.jpg" alt="3種お試しセット" loading="lazy" />
       </div>
       <div class="starter-content">
         <span class="starter-tag">FOR FIRST TIME</span>
@@ -1562,7 +1562,7 @@
   <div class="container">
     <div class="subscription reveal">
       <div class="img-slot subscription-img aspect-4-3" data-fallback="[ SUBSCRIPTION ・ 定期便 ]">
-        <img src="images/subscription.png" alt="定期便のイメージ" loading="lazy" />
+        <img src="images/subscription.jpg" alt="定期便のイメージ" loading="lazy" />
       </div>
       <div class="subscription-content">
         <span class="subscription-label">Subscription</span>
@@ -2037,9 +2037,9 @@
   // =========================================================
   const PRODUCTS = [
     // 焙煎豆 (roasted) — 8 items
-    { category: 'roasted', name: 'パプアニューギニア コルブラン', origin: 'Floral · Fruity / 190g', desc: '華やかな香りとフルーティーな酸味。朝の一杯に。', label: 'Light', price: '¥1,986', image: 'images/product-01.png' },
-    { category: 'roasted', name: 'タンザニア コンゴニ', origin: 'Bright · Clean / 160g', desc: '軽やかでスッキリ、キリマンジャロの爽やかさ。', label: 'Medium', price: '¥1,810', image: 'images/product-02.png' },
-    { category: 'roasted', name: 'インドネシア マンデリン', origin: 'Deep · Rich / 135g', desc: '深いコクと香ばしさ。アイスコーヒーにも。', label: 'Dark', price: '¥1,639', image: 'images/product-03.png' },
+    { category: 'roasted', name: 'パプアニューギニア コルブラン', origin: 'Floral · Fruity / 190g', desc: '華やかな香りとフルーティーな酸味。朝の一杯に。', label: 'Light', price: '¥1,986', image: 'images/product-01.jpg' },
+    { category: 'roasted', name: 'タンザニア コンゴニ', origin: 'Bright · Clean / 160g', desc: '軽やかでスッキリ、キリマンジャロの爽やかさ。', label: 'Medium', price: '¥1,810', image: 'images/product-02.jpg' },
+    { category: 'roasted', name: 'インドネシア マンデリン', origin: 'Deep · Rich / 135g', desc: '深いコクと香ばしさ。アイスコーヒーにも。', label: 'Dark', price: '¥1,639', image: 'images/product-03.jpg' },
     { category: 'roasted', name: 'コスタリカ サンタルシア', origin: 'Floral · Organic / 100g', desc: 'EM菌農法。フローラルな香りと透明感のある味。', label: 'Light', price: '¥978', image: 'images/product-04.jpg' },
     { category: 'roasted', name: 'エチオピア モカ シダモ', origin: 'Mocha · Juicy / 150g', desc: 'コーヒーの原点。モカフレーバーとジューシーな余韻。', label: 'Light', price: '¥1,720', image: 'images/product-05.jpg' },
     { category: 'roasted', name: 'ケニア エンブ', origin: 'Wild · Aromatic / 150g', desc: 'ワイルドさと極上のアロマ。一目置かれる一杯。', label: 'Medium', price: '¥1,950', image: 'images/product-06.jpg' },
@@ -2047,13 +2047,13 @@
     { category: 'roasted', name: '3種飲み比べセット', origin: '浅・中・深 / ミニボトル×3本', desc: '焙煎度の違いを一度に体感できる、初心者向けセット。', label: 'Set', price: '¥3,500', image: 'images/product-08.jpg' },
 
     // 生豆 (green) — 8 items
-    { category: 'green', name: 'エチオピア モカ シダモ 生豆', origin: 'New Crop / 100g', desc: '自家焙煎の練習に最適。モカフレーバーの代表格。', label: 'Green', price: '¥924', image: 'images/product-09.png' },
-    { category: 'green', name: 'ケニア エンブ 生豆', origin: 'New Crop / 100g', desc: '深いコクと香り。焙煎しがいのある高級豆。', label: 'Green', price: '¥889', image: 'images/product-10.png' },
-    { category: 'green', name: 'コスタリカ サンタルシア 生豆', origin: 'Organic / 100g', desc: 'EM菌農法による無農薬栽培の透明感ある一品。', label: 'Green', price: '¥978', image: 'images/product-11.png' },
-    { category: 'green', name: 'イーストティモール 生豆', origin: 'New Crop / 100g', desc: '個性的な香りと柑橘系の余韻。コクも豊か。', label: 'Green', price: '¥825', image: 'images/product-12.png' },
-    { category: 'green', name: 'パプアニューギニア 生豆', origin: 'New Crop / 100g', desc: '華やかさとボディ感のバランスが秀逸。', label: 'Green', price: '¥870', image: 'images/product-13.png' },
-    { category: 'green', name: 'タンザニア 生豆', origin: 'New Crop / 100g', desc: 'キリマンジャロ系の爽やかな酸味と切れ味。', label: 'Green', price: '¥861', image: 'images/product-14.png' },
-    { category: 'green', name: 'インドネシア マンデリン 生豆', origin: 'New Crop / 100g', desc: '深煎り向け。コクと口当たりのキレが魅力。', label: 'Green', price: '¥885', image: 'images/product-15.png' },
+    { category: 'green', name: 'エチオピア モカ シダモ 生豆', origin: 'New Crop / 100g', desc: '自家焙煎の練習に最適。モカフレーバーの代表格。', label: 'Green', price: '¥924', image: 'images/product-09.jpg' },
+    { category: 'green', name: 'ケニア エンブ 生豆', origin: 'New Crop / 100g', desc: '深いコクと香り。焙煎しがいのある高級豆。', label: 'Green', price: '¥889', image: 'images/product-10.jpg' },
+    { category: 'green', name: 'コスタリカ サンタルシア 生豆', origin: 'Organic / 100g', desc: 'EM菌農法による無農薬栽培の透明感ある一品。', label: 'Green', price: '¥978', image: 'images/product-11.jpg' },
+    { category: 'green', name: 'イーストティモール 生豆', origin: 'New Crop / 100g', desc: '個性的な香りと柑橘系の余韻。コクも豊か。', label: 'Green', price: '¥825', image: 'images/product-12.jpg' },
+    { category: 'green', name: 'パプアニューギニア 生豆', origin: 'New Crop / 100g', desc: '華やかさとボディ感のバランスが秀逸。', label: 'Green', price: '¥870', image: 'images/product-13.jpg' },
+    { category: 'green', name: 'タンザニア 生豆', origin: 'New Crop / 100g', desc: 'キリマンジャロ系の爽やかな酸味と切れ味。', label: 'Green', price: '¥861', image: 'images/product-14.jpg' },
+    { category: 'green', name: 'インドネシア マンデリン 生豆', origin: 'New Crop / 100g', desc: '深煎り向け。コクと口当たりのキレが魅力。', label: 'Green', price: '¥885', image: 'images/product-15.jpg' },
     { category: 'green', name: '生豆お試し3種セット', origin: '100g×3種 / アソート', desc: '産地の違いを焙煎しながら比べられる入門セット。', label: 'Set', price: '¥2,500', image: 'images/product-16.jpg' },
 
     // 定期便 (subscription) — 8 items
@@ -2069,9 +2069,9 @@
     // 焙煎器・グッズ (goods) — 8 items
     { category: 'goods', name: '新型ロースター', origin: '焙煎器 / 単品', desc: '自宅で本格焙煎が楽しめる、コンパクト型ロースター。', label: 'Roaster', price: '¥8,800', image: 'images/product-25.jpg' },
     { category: 'goods', name: 'ロースタースターターセット', origin: '焙煎器 + 生豆 100g', desc: '初めて焙煎する方向け。器具一式と生豆がセットに。', label: 'Set', price: '¥15,000', image: 'images/product-26.jpg' },
-    { category: 'goods', name: 'ハンドドリップ基本セット', origin: 'ドリッパー・サーバー他', desc: 'ドリップに必要な道具一式。豆ミニボトル付き。', label: 'Set', price: '¥3,800', image: 'images/product-27.png' },
-    { category: 'goods', name: '電動コーヒーミルセット', origin: '電動ミル + 焙煎豆', desc: '家庭で挽きたてを楽しむ、入門ミルセット。', label: 'Set', price: '¥4,500', image: 'images/product-28.png' },
-    { category: 'goods', name: 'ハンドドリップDXセット', origin: '基本セット + 電動ミル', desc: '一通り揃う、ドリップ・自家挽きの完全セット。', label: 'Premium', price: '¥7,400', image: 'images/product-29.png' },
+    { category: 'goods', name: 'ハンドドリップ基本セット', origin: 'ドリッパー・サーバー他', desc: 'ドリップに必要な道具一式。豆ミニボトル付き。', label: 'Set', price: '¥3,800', image: 'images/product-27.jpg' },
+    { category: 'goods', name: '電動コーヒーミルセット', origin: '電動ミル + 焙煎豆', desc: '家庭で挽きたてを楽しむ、入門ミルセット。', label: 'Set', price: '¥4,500', image: 'images/product-28.jpg' },
+    { category: 'goods', name: 'ハンドドリップDXセット', origin: '基本セット + 電動ミル', desc: '一通り揃う、ドリップ・自家挽きの完全セット。', label: 'Premium', price: '¥7,400', image: 'images/product-29.jpg' },
     // { category: 'goods', name: '専用ペーパーフィルター', origin: '100枚入', desc: 'HASABAドリッパー対応の専用フィルター。', label: 'Filter', price: '¥600', image: 'images/product-30.jpg' },
     // { category: 'goods', name: '耐圧保存ボトル', origin: '空ボトル / 単品', desc: '焙煎豆の鮮度を保つ、HASABA独自の専用ボトル。', label: 'Bottle', price: '¥300', image: 'images/product-31.jpg' },
     // { category: 'goods', name: '宮古島やちむんマグ', origin: '宮古島ローカル / 1個', desc: '伝統工芸「やちむん」によるオリジナルマグカップ。', label: 'Local', price: '¥2,500', image: 'images/product-32.jpg' }
