@@ -626,6 +626,35 @@
     background: var(--color-roast-red); color: var(--color-cream-canvas);
     margin-bottom: 8px; letter-spacing: 0.15em; font-weight: 700; text-transform: uppercase;
   }
+  /* =========================================================
+     Roast / Category Badge Variants
+     ========================================================= */
+  .product-roast.light        { background: #c46500; }
+  .product-roast.medium       { background: #8f3f25; }
+  .product-roast.dark         { background: #522c25; }
+  .product-roast.green        { background: #6f7a45; }
+  .product-roast.subscription { background: #5f7f8f; }
+  .product-roast.goods        { background: #7f6b65; }
+
+  /* Subtle category accent: 2px line at the bottom of the product image */
+  .product-card[data-badge="light"]        { --badge-accent: #c46500; }
+  .product-card[data-badge="medium"]       { --badge-accent: #8f3f25; }
+  .product-card[data-badge="dark"]         { --badge-accent: #522c25; }
+  .product-card[data-badge="green"]        { --badge-accent: #6f7a45; }
+  .product-card[data-badge="subscription"] { --badge-accent: #5f7f8f; }
+  .product-card[data-badge="goods"]        { --badge-accent: #7f6b65; }
+  .product-card[data-badge] .product-card-img::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--badge-accent, transparent);
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity .2s ease;
+  }
+  .product-card:hover .product-card-img::after { opacity: 0.9; }
   .product-name {
     font-family: var(--font-display); font-size: 15px; font-weight: 600;
     margin-bottom: 6px; line-height: 1.3; letter-spacing: -0.02em; color: var(--color-vinyl-brown);
@@ -645,6 +674,74 @@
   }
   .products-cta { text-align: center; margin-top: 48px; }
   @media (min-width: 720px) { .product-grid { grid-template-columns: repeat(4, 1fr); gap: 24px; } }
+
+  /* =========================================================
+     Product Slider
+     ========================================================= */
+  .product-slider-wrap { position: relative; }
+  .product-slider-controls {
+    display: flex; gap: 8px; justify-content: flex-end; margin-bottom: 18px;
+  }
+  .slider-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--color-vinyl-brown); background: transparent;
+    color: var(--color-vinyl-brown);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: var(--font-body); font-size: 16px; line-height: 1;
+    transition: background .2s ease, color .2s ease, opacity .2s ease;
+  }
+  .slider-btn:hover { background: var(--color-vinyl-brown); color: var(--color-cream-canvas); }
+  .slider-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+
+  .product-slider {
+    display: flex; gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 4px 4px 12px;
+    margin: -4px -4px 0;
+    cursor: grab;
+  }
+  .product-slider::-webkit-scrollbar { display: none; }
+  .product-slider:focus { outline: none; }
+  .product-slider:focus-visible { outline: 2px solid var(--color-roast-red); outline-offset: 4px; }
+  .product-slider.is-grabbing { cursor: grabbing; user-select: none; }
+  .product-slider.is-grabbing a, .product-slider.is-grabbing button { pointer-events: none; }
+
+  .product-slider .product-card {
+    flex: 0 0 calc(50% - 8px);
+    scroll-snap-align: start;
+    display: flex; flex-direction: column;
+    min-width: 0;
+  }
+  @media (min-width: 720px) {
+    .product-slider .product-card { flex: 0 0 calc(33.333% - 11px); }
+  }
+  @media (min-width: 1080px) {
+    .product-slider .product-card { flex: 0 0 calc(25% - 12px); }
+  }
+
+  .product-slider .product-card-body {
+    flex: 1; display: flex; flex-direction: column;
+  }
+  .product-desc {
+    font-size: 12px; line-height: 1.7;
+    color: var(--color-muted-taupe); margin: 0 0 14px;
+    letter-spacing: 0.04em;
+  }
+  .product-card-footer {
+    margin-top: auto; padding-top: 12px;
+    border-top: 1px solid var(--color-smoky-ash);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+  }
+  .product-card-footer .product-price { font-size: 15px; }
+  .product-card-footer .btn-text {
+    font-size: 10px; letter-spacing: 0.12em;
+    padding-bottom: 3px; flex-shrink: 0;
+  }
 
   /* =========================================================
      Voices
@@ -770,6 +867,110 @@
   .workshop-card-cta { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
   .workshop-card .btn { width: 100%; }
   @media (min-width: 880px) { .workshop-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
+
+  /* =========================================================
+     Workshop Store Selector
+     ========================================================= */
+  .workshop-store-selector { margin-bottom: 16px; }
+  .workshop-store-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-muted-taupe);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .workshop-store-tabs {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .workshop-store-tab {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 9px 14px;
+    border: 1px solid var(--color-smoky-ash);
+    border-radius: 999px;
+    background: var(--color-warm-beige);
+    color: var(--color-vinyl-brown);
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+    line-height: 1;
+    min-height: 36px;
+  }
+  .workshop-store-tab:hover { border-color: var(--color-vinyl-brown); }
+  .workshop-store-tab.is-active {
+    background: var(--color-vinyl-brown);
+    color: var(--color-cream-canvas);
+    border-color: var(--color-vinyl-brown);
+  }
+
+  .workshop-reservation-info {
+    background: var(--color-cream-canvas);
+    border: 1px solid var(--color-smoky-ash);
+    border-radius: var(--radius-card);
+    padding: 16px 18px;
+    margin-bottom: 18px;
+  }
+  .workshop-status-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    padding: 4px 10px;
+    border-radius: var(--radius-badge);
+    background: var(--color-roast-red);
+    color: var(--color-cream-canvas);
+    margin-bottom: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .workshop-status-badge[data-status="none"],
+  .workshop-status-badge[data-status="preparing"] {
+    background: var(--color-muted-taupe);
+  }
+  .workshop-status-badge[data-status="inquiry"],
+  .workshop-status-badge[data-status="coming"] {
+    background: var(--color-mellow-ochre);
+  }
+  .workshop-selected-store {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-vinyl-brown);
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+  .workshop-reservation-method {
+    font-size: 12px;
+    color: var(--color-vinyl-brown);
+    line-height: 1.65;
+    margin: 0 0 6px;
+    letter-spacing: 0.04em;
+  }
+  .workshop-reservation-note {
+    font-size: 12px;
+    color: var(--color-muted-taupe);
+    line-height: 1.65;
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+  .workshop-reservation-method:empty,
+  .workshop-reservation-note:empty { display: none; }
+
+  .workshop-reserve-btn.is-disabled {
+    background: var(--color-warm-beige);
+    color: var(--color-muted-taupe);
+    border-color: var(--color-smoky-ash);
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.85;
+  }
+  .workshop-reserve-btn.is-disabled:hover {
+    background: var(--color-warm-beige);
+    color: var(--color-muted-taupe);
+  }
 
   /* =========================================================
      Stores
@@ -1100,14 +1301,14 @@
     <p class="hero-category">
       <span>コーヒー豆通販</span><span class="dot"></span>
       <span>体験ワークショップ</span><span class="dot"></span>
-      <span>直営3店舗</span>
+      <span>系列3店舗</span>
     </p>
-    <p class="hero-subtitle">沖縄・宮古島の焙煎所から、ニュークロップだけを焙煎して全国へ。<br />フレッシュな香りをそのまま、ご自宅へお届けします。</p>
+    <p class="hero-subtitle">沖縄・宮古島発、ニュークロップだけを焙煎後すぐに全国へ。<br />フレッシュな香りをそのままご自宅へお届けします。</p>
     <div class="hero-ctas">
       <a href="#products" class="btn btn-primary">コーヒー豆を購入する</a>
       <a href="#workshop" class="btn btn-ghost-light">ワークショップを予約する</a>
     </div>
-    <p class="hero-microcopy">100g ¥978〜・送料込み定期便あり・全国発送OK</p>
+    <p class="hero-microcopy">定期便あり・全国発送OK</p>
   </div>
   <div class="hero-scroll">SCROLL</div>
 </section>
@@ -1121,7 +1322,7 @@
       <div class="trust-badge"><strong>宮古島</strong><small>本店・焙煎所</small></div>
       <div class="trust-badge"><strong>7産地</strong><small>ニュークロップのみ</small></div>
       <div class="trust-badge"><strong>3店舗</strong><small>宮古島／新所沢／伊良部島</small></div>
-      <div class="trust-badge"><strong>50円OFF</strong><small>ボトル返却サービス</small></div>
+      <div class="trust-badge"><strong>1700名超</strong><small>WS受講者</small></div> 
     </div>
   </div>
 </section>
@@ -1131,12 +1332,12 @@
      ========================================================= -->
 <section class="brand-message">
   <div class="brand-message-inner reveal">
-    <p class="brand-question">― あなたが今飲んでいるコーヒー、本当に「フレッシュ」ですか？</p>
+    <p class="brand-question">― 今飲んでいるコーヒー、本当に「フレッシュ」ですか？</p>
     <p class="brand-statement">
       コーヒーは、焙煎した瞬間から<br />
       <em>香りを失っていく飲み物</em>です。
     </p>
-    <p>だから私たちは、ニュークロップだけを焙煎し、独自のペットボトル保存で鮮度のまま届けています。</p>
+    <p>だから私たちはニュークロップだけを焙煎し、独自のペットボトル保存で鮮度のまま届けています。</p>
   </div>
 </section>
 
@@ -1154,11 +1355,11 @@
 
       <article class="way-card reveal">
         <div class="img-slot way-card-img aspect-4-3" data-fallback="[ STEP 01 ・ 焙煎豆ボトル ]">
-          <img src="images/way-01.jpg" alt="フレッシュな豆を、買う" loading="lazy" />
+          <img src="images/way-01.png" alt="フレッシュな豆を、買う" loading="lazy" />
         </div>
         <div class="way-card-body">
           <p class="way-card-step">STEP 01</p>
-          <h3>フレッシュな豆を、買う</h3>
+          <h3>フレッシュな豆を買う</h3>
           <p>焙煎したてのスペシャルティコーヒーを、鮮度を保つペットボトルで。冷凍OK・解凍不要。</p>
           <a href="#products" class="btn-text">商品を見る</a>
         </div>
@@ -1170,7 +1371,7 @@
         </div>
         <div class="way-card-body">
           <p class="way-card-step">STEP 02</p>
-          <h3>自分の手で、淹れる</h3>
+          <h3>自分の手で淹れる</h3>
           <p>少人数制ハンドドリップWS。道具の選び方から、淹れ方まで丁寧にお伝えします。</p>
           <a href="#workshop" class="btn-text">ワークショップを見る</a>
         </div>
@@ -1182,7 +1383,7 @@
         </div>
         <div class="way-card-body">
           <p class="way-card-step">STEP 03</p>
-          <h3>自分の豆を、焙煎する</h3>
+          <h3>自分の豆を焙煎する</h3>
           <p>「珈琲焙煎の民衆化」を掲げる看板プログラム。一生もののスキルを、プロのサポートで。</p>
           <a href="#workshop" class="btn-text">ワークショップを見る</a>
         </div>
@@ -1255,7 +1456,7 @@
 
     <div id="starter" class="starter reveal">
       <div class="img-slot starter-img aspect-16-10" data-fallback="[ STARTER ・ 3種お試しセット ]">
-        <img src="images/starter.jpg" alt="3種お試しセット" loading="lazy" />
+        <img src="images/starter.png" alt="3種お試しセット" loading="lazy" />
       </div>
       <div class="starter-content">
         <span class="starter-tag">FOR FIRST TIME</span>
@@ -1273,63 +1474,21 @@
       </div>
     </div>
 
-    <div class="product-tabs reveal">
-      <button class="product-tab is-active" data-tab="roasted">焙煎豆</button>
-      <button class="product-tab" data-tab="green">生豆</button>
-      <button class="product-tab" data-tab="subscription">定期便</button>
-      <button class="product-tab" data-tab="goods">焙煎器・グッズ</button>
+    <div class="product-tabs reveal" role="tablist" aria-label="商品カテゴリー">
+      <button class="product-tab is-active" data-category="roasted" role="tab" aria-selected="true">焙煎豆</button>
+      <button class="product-tab" data-category="green" role="tab" aria-selected="false">生豆</button>
+      <button class="product-tab" data-category="subscription" role="tab" aria-selected="false">定期便</button>
+      <button class="product-tab" data-category="goods" role="tab" aria-selected="false">焙煎器・グッズ</button>
     </div>
 
-    <div class="product-grid reveal" id="product-grid">
-
-      <article class="product-card">
-        <div class="img-slot product-card-img aspect-1-1" data-fallback="[ PRODUCT 01 ・ パプアニューギニア ]">
-          <img src="images/product-01.jpg" alt="パプアニューギニア コルブラン" loading="lazy" />
-        </div>
-        <div class="product-card-body">
-          <span class="product-roast">Light</span>
-          <h4 class="product-name">パプアニューギニア コルブラン</h4>
-          <p class="product-origin">Floral · Fruity / 190g</p>
-          <p class="product-price">¥1,986<small>tax in</small></p>
-        </div>
-      </article>
-
-      <article class="product-card">
-        <div class="img-slot product-card-img aspect-1-1" data-fallback="[ PRODUCT 02 ・ タンザニア ]">
-          <img src="images/product-02.jpg" alt="タンザニア コンゴニ" loading="lazy" />
-        </div>
-        <div class="product-card-body">
-          <span class="product-roast">Medium</span>
-          <h4 class="product-name">タンザニア コンゴニ</h4>
-          <p class="product-origin">Bright · Clean / 160g</p>
-          <p class="product-price">¥1,810<small>tax in</small></p>
-        </div>
-      </article>
-
-      <article class="product-card">
-        <div class="img-slot product-card-img aspect-1-1" data-fallback="[ PRODUCT 03 ・ インドネシア ]">
-          <img src="images/product-03.jpg" alt="インドネシア マンデリン" loading="lazy" />
-        </div>
-        <div class="product-card-body">
-          <span class="product-roast">Dark</span>
-          <h4 class="product-name">インドネシア マンデリン</h4>
-          <p class="product-origin">Deep · Rich / 135g</p>
-          <p class="product-price">¥1,639<small>tax in</small></p>
-        </div>
-      </article>
-
-      <article class="product-card">
-        <div class="img-slot product-card-img aspect-1-1" data-fallback="[ PRODUCT 04 ・ コスタリカ ]">
-          <img src="images/product-04.jpg" alt="コスタリカ サンタルシア" loading="lazy" />
-        </div>
-        <div class="product-card-body">
-          <span class="product-roast">Light</span>
-          <h4 class="product-name">コスタリカ サンタルシア</h4>
-          <p class="product-origin">Floral · Organic / 100g</p>
-          <p class="product-price">¥978<small>tax in</small></p>
-        </div>
-      </article>
-
+    <div class="product-slider-wrap reveal">
+      <div class="product-slider-controls">
+        <button class="slider-btn slider-prev" type="button" aria-label="前の商品へ"><span aria-hidden="true">←</span></button>
+        <button class="slider-btn slider-next" type="button" aria-label="次の商品へ"><span aria-hidden="true">→</span></button>
+      </div>
+      <div class="product-slider" id="product-slider" role="region" aria-label="商品ラインナップ" tabindex="0">
+        <!-- Product cards rendered by JS based on the active category -->
+      </div>
     </div>
 
     <div class="products-cta reveal">
@@ -1403,7 +1562,7 @@
   <div class="container">
     <div class="subscription reveal">
       <div class="img-slot subscription-img aspect-4-3" data-fallback="[ SUBSCRIPTION ・ 定期便 ]">
-        <img src="images/subscription.jpg" alt="定期便のイメージ" loading="lazy" />
+        <img src="images/subscription.png" alt="定期便のイメージ" loading="lazy" />
       </div>
       <div class="subscription-content">
         <span class="subscription-label">Subscription</span>
@@ -1438,7 +1597,7 @@
 
     <div class="workshop-grid">
 
-      <article class="workshop-card reveal">
+      <article class="workshop-card reveal" data-workshop="drip">
         <div class="img-slot workshop-card-img aspect-16-10" data-fallback="[ DRIP WORKSHOP ]">
           <img src="images/workshop-drip.jpg" alt="ハンドドリップワークショップ" loading="lazy" />
         </div>
@@ -1455,16 +1614,33 @@
             <div><dt>Fee</dt><dd>¥2,500<small>/人</small></dd></div>
             <div><dt>Time</dt><dd>60<small>min</small></dd></div>
             <div><dt>Capacity</dt><dd>3<small>人/回</small></dd></div>
-            <div><dt>Place</dt><dd>新所沢ほか</dd></div>
+            <div><dt>Place</dt><dd class="workshop-place"></dd></div>
           </dl>
+
+          <div class="workshop-store-selector">
+            <p class="workshop-store-label">開催店舗を選択</p>
+            <div class="workshop-store-tabs" role="tablist" aria-label="ハンドドリップワークショップの開催店舗">
+              <button type="button" class="workshop-store-tab" data-store="miyakojima" role="tab">宮古島本店</button>
+              <button type="button" class="workshop-store-tab" data-store="shintoko" role="tab">新所沢店</button>
+              <button type="button" class="workshop-store-tab" data-store="irabu" role="tab">伊良部島店</button>
+            </div>
+          </div>
+
+          <div class="workshop-reservation-info" role="region" aria-live="polite">
+            <span class="workshop-status-badge"></span>
+            <p class="workshop-selected-store"></p>
+            <p class="workshop-reservation-method"></p>
+            <p class="workshop-reservation-note"></p>
+          </div>
+
           <div class="workshop-card-cta">
-            <a href="https://dripws.hasabacoffee.com/" target="_blank" rel="noopener" class="btn btn-primary">ドリップWSを予約</a>
+            <a href="#" class="btn btn-primary workshop-reserve-btn"></a>
             <span class="cta-microcopy">参加者特典: キット10%OFF</span>
           </div>
         </div>
       </article>
 
-      <article class="workshop-card reveal">
+      <article class="workshop-card reveal" data-workshop="roast">
         <div class="img-slot workshop-card-img aspect-16-10" data-fallback="[ ROAST WORKSHOP ]">
           <img src="images/workshop-roast.jpg" alt="珈琲焙煎ワークショップ" loading="lazy" />
         </div>
@@ -1481,10 +1657,27 @@
             <div><dt>Fee</dt><dd>¥5,000<small>/人</small></dd></div>
             <div><dt>Time</dt><dd>120<small>min</small></dd></div>
             <div><dt>Capacity</dt><dd>4<small>人/回</small></dd></div>
-            <div><dt>Place</dt><dd>土日中心</dd></div>
+            <div><dt>Place</dt><dd class="workshop-place"></dd></div>
           </dl>
+
+          <div class="workshop-store-selector">
+            <p class="workshop-store-label">開催店舗を選択</p>
+            <div class="workshop-store-tabs" role="tablist" aria-label="珈琲焙煎ワークショップの開催店舗">
+              <button type="button" class="workshop-store-tab" data-store="miyakojima" role="tab">宮古島本店</button>
+              <button type="button" class="workshop-store-tab" data-store="shintoko" role="tab">新所沢店</button>
+              <button type="button" class="workshop-store-tab" data-store="irabu" role="tab">伊良部島店</button>
+            </div>
+          </div>
+
+          <div class="workshop-reservation-info" role="region" aria-live="polite">
+            <span class="workshop-status-badge"></span>
+            <p class="workshop-selected-store"></p>
+            <p class="workshop-reservation-method"></p>
+            <p class="workshop-reservation-note"></p>
+          </div>
+
           <div class="workshop-card-cta">
-            <a href="https://workshop.hasabacoffee.com/" target="_blank" rel="noopener" class="btn btn-primary">焙煎WSを予約</a>
+            <a href="#" class="btn btn-primary workshop-reserve-btn"></a>
             <span class="cta-microcopy">LINE登録で24時間予約OK</span>
           </div>
         </div>
@@ -1515,10 +1708,13 @@
           <h3>宮古島本店</h3>
           <p class="area">Okinawa / Miyakojima</p>
           <dl class="store-info">
-            <div><dt>Address</dt><dd>沖縄県宮古島市</dd></div>
-            <div><dt>Hours</dt><dd>各種SNSにてご案内</dd></div>
+            <div><dt>Address</dt><dd>沖縄県宮古島市平良西里1886-1<br />ローカルベース内</dd></div>
+            <div><dt>Access</dt><dd>宮古空港から車で8分</dd></div>
+            <div><dt>Open</dt><dd>月・水・金・土(隔土)<br />10:00〜15:00</dd></div>
+            <div><dt>焙煎日</dt><dd>月・水・金</dd></div>
+            <div><dt>Workshop</dt><dd>火・木</dd></div>
           </dl>
-          <a href="#" class="btn btn-ghost btn-arrow">詳細を見る</a>
+          <a href="https://www.google.com/maps?q=place_id:ChIJmwJLFFdX9DQRe8Xq7bV9-Zk" target="_blank" rel="noopener" class="btn btn-ghost btn-arrow">Google Map で開く</a>
         </div>
       </article>
 
@@ -1531,11 +1727,12 @@
           <h3>新所沢店</h3>
           <p class="area">Saitama / Tokorozawa</p>
           <dl class="store-info">
-            <div><dt>Address</dt><dd>埼玉県所沢市松葉町16-14</dd></div>
-            <div><dt>Mon–Fri</dt><dd>7:00 – 17:00</dd></div>
-            <div><dt>Sat–Sun</dt><dd>10:00 – 16:00</dd></div>
+            <div><dt>Address</dt><dd>〒359-0044<br />埼玉県所沢市松葉町16-14</dd></div>
+            <div><dt>Access</dt><dd>西武新宿線 新所沢駅より徒歩1分</dd></div>
+            <div><dt>Open</dt><dd>平日 7:00 – 17:00<br />土日 10:00 – 16:00</dd></div>
+            <div><dt>定休日</dt><dd>祝日</dd></div>
           </dl>
-          <a href="https://shintoko.hasabacoffee.com/" target="_blank" rel="noopener" class="btn btn-ghost btn-arrow">詳細を見る</a>
+          <a href="https://www.google.com/maps/place/HASABA+COFFEE+%E6%96%B0%E6%89%80%E6%B2%A2%E5%BA%97/@35.807828,139.4573459,17z/data=!3m1!5s0x6018ddc548f602e7:0x3e7e6f789235bbb6!4m15!1m8!3m7!1s0x6018ddc54861b555:0x8bf08e8c848a8506!2z44CSMzU5LTAwNDQg5Z-8546J55yM5omA5rKi5biC5p2-6JGJ55S677yR77yW4oiS77yR77yU!3b1!8m2!3d35.807828!4d139.4573459!16s%2Fg%2F12hk9c22k!3m5!1s0x6018dd5656f66507:0x386c0ee9c1a4a0dc!8m2!3d35.8077914!4d139.4573781!16s%2Fg%2F11yj_97h43" target="_blank" rel="noopener" class="btn btn-ghost btn-arrow">Google Map で開く</a>
         </div>
       </article>
 
@@ -1548,10 +1745,12 @@
           <h3>伊良部島店</h3>
           <p class="area">Okinawa / Irabu Island</p>
           <dl class="store-info">
-            <div><dt>Address</dt><dd>沖縄県宮古島市伊良部</dd></div>
-            <div><dt>Hours</dt><dd>準備中・SNSにて告知</dd></div>
+            <div><dt>Address</dt><dd>〒906-0501<br />沖縄県宮古島市伊良部前里添554-1</dd></div>
+            <div><dt>Access</dt><dd>下地空港から車で12分</dd></div>
+            <div><dt>Open</dt><dd>6:30〜16:00</dd></div>
+            <div><dt>定休日</dt><dd>火曜日</dd></div>
           </dl>
-          <a href="#" class="btn btn-ghost btn-arrow">詳細を見る</a>
+          <a href="https://www.google.com/maps/place/HINODE+COFFEE+%7C+%E8%87%AA%E5%AE%B6%E7%84%99%E7%85%8E%E7%8F%88%E7%90%B2%E3%83%BB%E7%B1%B3%E7%B2%89%E3%83%89%E3%83%BC%E3%83%8A%E3%83%84/@24.8459624,125.2074013,1043m/data=!3m2!1e3!4b1!4m6!3m5!1s0x34f5ad005c2e9739:0xb6a23cd813c9e350!8m2!3d24.8459624!4d125.2074013!16s%2Fg%2F11wv3jhh88" target="_blank" rel="noopener" class="btn btn-ghost btn-arrow">Google Map で開く</a>
         </div>
       </article>
 
@@ -1833,12 +2032,318 @@
     });
   });
 
-  // Product tabs (UI only)
-  const tabs = document.querySelectorAll('.product-tab');
-  tabs.forEach(tab => {
+  // =========================================================
+  // Products: data, render, tabs, slider controls
+  // =========================================================
+  const PRODUCTS = [
+    // 焙煎豆 (roasted) — 8 items
+    { category: 'roasted', name: 'パプアニューギニア コルブラン', origin: 'Floral · Fruity / 190g', desc: '華やかな香りとフルーティーな酸味。朝の一杯に。', label: 'Light', price: '¥1,986', image: 'images/product-01.png' },
+    { category: 'roasted', name: 'タンザニア コンゴニ', origin: 'Bright · Clean / 160g', desc: '軽やかでスッキリ、キリマンジャロの爽やかさ。', label: 'Medium', price: '¥1,810', image: 'images/product-02.png' },
+    { category: 'roasted', name: 'インドネシア マンデリン', origin: 'Deep · Rich / 135g', desc: '深いコクと香ばしさ。アイスコーヒーにも。', label: 'Dark', price: '¥1,639', image: 'images/product-03.png' },
+    { category: 'roasted', name: 'コスタリカ サンタルシア', origin: 'Floral · Organic / 100g', desc: 'EM菌農法。フローラルな香りと透明感のある味。', label: 'Light', price: '¥978', image: 'images/product-04.jpg' },
+    { category: 'roasted', name: 'エチオピア モカ シダモ', origin: 'Mocha · Juicy / 150g', desc: 'コーヒーの原点。モカフレーバーとジューシーな余韻。', label: 'Light', price: '¥1,720', image: 'images/product-05.jpg' },
+    { category: 'roasted', name: 'ケニア エンブ', origin: 'Wild · Aromatic / 150g', desc: 'ワイルドさと極上のアロマ。一目置かれる一杯。', label: 'Medium', price: '¥1,950', image: 'images/product-06.jpg' },
+    { category: 'roasted', name: 'イーストティモール レテフォホ', origin: 'Citrus · Body / 150g', desc: '柑橘系の個性的な香りとしっかりしたコク。', label: 'Medium', price: '¥1,580', image: 'images/product-07.jpg' },
+    { category: 'roasted', name: '3種飲み比べセット', origin: '浅・中・深 / ミニボトル×3本', desc: '焙煎度の違いを一度に体感できる、初心者向けセット。', label: 'Set', price: '¥3,500', image: 'images/product-08.jpg' },
+
+    // 生豆 (green) — 8 items
+    { category: 'green', name: 'エチオピア モカ シダモ 生豆', origin: 'New Crop / 100g', desc: '自家焙煎の練習に最適。モカフレーバーの代表格。', label: 'Green', price: '¥924', image: 'images/product-09.png' },
+    { category: 'green', name: 'ケニア エンブ 生豆', origin: 'New Crop / 100g', desc: '深いコクと香り。焙煎しがいのある高級豆。', label: 'Green', price: '¥889', image: 'images/product-10.png' },
+    { category: 'green', name: 'コスタリカ サンタルシア 生豆', origin: 'Organic / 100g', desc: 'EM菌農法による無農薬栽培の透明感ある一品。', label: 'Green', price: '¥978', image: 'images/product-11.png' },
+    { category: 'green', name: 'イーストティモール 生豆', origin: 'New Crop / 100g', desc: '個性的な香りと柑橘系の余韻。コクも豊か。', label: 'Green', price: '¥825', image: 'images/product-12.png' },
+    { category: 'green', name: 'パプアニューギニア 生豆', origin: 'New Crop / 100g', desc: '華やかさとボディ感のバランスが秀逸。', label: 'Green', price: '¥870', image: 'images/product-13.png' },
+    { category: 'green', name: 'タンザニア 生豆', origin: 'New Crop / 100g', desc: 'キリマンジャロ系の爽やかな酸味と切れ味。', label: 'Green', price: '¥861', image: 'images/product-14.png' },
+    { category: 'green', name: 'インドネシア マンデリン 生豆', origin: 'New Crop / 100g', desc: '深煎り向け。コクと口当たりのキレが魅力。', label: 'Green', price: '¥885', image: 'images/product-15.png' },
+    { category: 'green', name: '生豆お試し3種セット', origin: '100g×3種 / アソート', desc: '産地の違いを焙煎しながら比べられる入門セット。', label: 'Set', price: '¥2,500', image: 'images/product-16.jpg' },
+
+    // 定期便 (subscription) — 8 items
+    { category: 'subscription', name: '焙煎豆スタンダード便', origin: '毎月・3種ミニボトル', desc: '人気の焙煎豆を3種お試しサイズで毎月お届け。', label: 'Monthly', price: '¥2,480', image: 'images/product-17.jpg' },
+    { category: 'subscription', name: '焙煎豆プレミアム便', origin: '毎月・3種フルボトル', desc: 'たっぷり楽しめる、フルサイズ3種セット。', label: 'Monthly', price: '¥4,800', image: 'images/product-18.jpg' },
+    { category: 'subscription', name: '生豆飲み比べ便', origin: '2ヶ月毎・100g×3種', desc: '産地の違いを楽しむ、自家焙煎ファンの定番。', label: 'Bi-Monthly', price: '¥1,950', image: 'images/product-19.jpg' },
+    { category: 'subscription', name: '生豆たっぷり便', origin: '2ヶ月毎・300g×3種', desc: 'じっくり焙煎を楽しみたい方への大容量プラン。', label: 'Bi-Monthly', price: '¥5,500', image: 'images/product-20.jpg' },
+    //{ category: 'subscription', name: '浅煎り定期便', origin: '毎月・浅煎り厳選', desc: 'フルーティーで華やかな浅煎りだけを集めたコース。', label: 'Light', price: '¥2,500', image: 'images/product-21.jpg' },
+    //{ category: 'subscription', name: '深煎り定期便', origin: '毎月・深煎り厳選', desc: 'コクと香ばしさが楽しめる深煎りファン向け。', label: 'Dark', price: '¥2,500', image: 'images/product-22.jpg' },
+    //{ category: 'subscription', name: '初回お試し3種便', origin: '隔月・初回限定', desc: '初めての方向け。気軽に始められる入門プラン。', label: 'Trial', price: '¥1,950', image: 'images/product-23.jpg' },
+    //{ category: 'subscription', name: '季節のおまかせ便', origin: '季節毎・厳選1種', desc: '季節に合う1種を厳選。送料込み・ギフト対応可。', label: 'Seasonal', price: '¥3,000', image: 'images/product-24.jpg' },
+
+    // 焙煎器・グッズ (goods) — 8 items
+    { category: 'goods', name: '新型ロースター', origin: '焙煎器 / 単品', desc: '自宅で本格焙煎が楽しめる、コンパクト型ロースター。', label: 'Roaster', price: '¥8,800', image: 'images/product-25.jpg' },
+    { category: 'goods', name: 'ロースタースターターセット', origin: '焙煎器 + 生豆 100g', desc: '初めて焙煎する方向け。器具一式と生豆がセットに。', label: 'Set', price: '¥15,000', image: 'images/product-26.jpg' },
+    { category: 'goods', name: 'ハンドドリップ基本セット', origin: 'ドリッパー・サーバー他', desc: 'ドリップに必要な道具一式。豆ミニボトル付き。', label: 'Set', price: '¥3,800', image: 'images/product-27.png' },
+    { category: 'goods', name: '電動コーヒーミルセット', origin: '電動ミル + 焙煎豆', desc: '家庭で挽きたてを楽しむ、入門ミルセット。', label: 'Set', price: '¥4,500', image: 'images/product-28.png' },
+    { category: 'goods', name: 'ハンドドリップDXセット', origin: '基本セット + 電動ミル', desc: '一通り揃う、ドリップ・自家挽きの完全セット。', label: 'Premium', price: '¥7,400', image: 'images/product-29.png' },
+    // { category: 'goods', name: '専用ペーパーフィルター', origin: '100枚入', desc: 'HASABAドリッパー対応の専用フィルター。', label: 'Filter', price: '¥600', image: 'images/product-30.jpg' },
+    // { category: 'goods', name: '耐圧保存ボトル', origin: '空ボトル / 単品', desc: '焙煎豆の鮮度を保つ、HASABA独自の専用ボトル。', label: 'Bottle', price: '¥300', image: 'images/product-31.jpg' },
+    // { category: 'goods', name: '宮古島やちむんマグ', origin: '宮古島ローカル / 1個', desc: '伝統工芸「やちむん」によるオリジナルマグカップ。', label: 'Local', price: '¥2,500', image: 'images/product-32.jpg' }
+  ];
+
+  const SHOP_URL = 'https://hasabacoffee.theshop.jp/';
+  const productSlider = document.getElementById('product-slider');
+  const productTabs = document.querySelectorAll('.product-tab');
+  const sliderPrev = document.querySelector('.slider-prev');
+  const sliderNext = document.querySelector('.slider-next');
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  function bindImgFallback(scope) {
+    (scope || document).querySelectorAll('.img-slot img').forEach(img => {
+      const markBroken = () => img.classList.add('is-broken');
+      img.addEventListener('error', markBroken);
+      if (img.complete && img.naturalWidth === 0) markBroken();
+    });
+  }
+
+  function getBadgeClass(p) {
+    // 焙煎豆: 焙煎度ラベル(Light/Medium/Dark)を直接マップ。Setなど他ラベルはmedium。
+    if (p.category === 'roasted') {
+      const l = String(p.label || '').toLowerCase();
+      if (l === 'light' || l === 'medium' || l === 'dark') return l;
+      return 'medium';
+    }
+    // 他カテゴリはカテゴリ名がそのままバッジクラス
+    if (p.category === 'green') return 'green';
+    if (p.category === 'subscription') return 'subscription';
+    if (p.category === 'goods') return 'goods';
+    return 'medium';
+  }
+
+  function renderProducts(category) {
+    if (!productSlider) return;
+    const items = PRODUCTS.filter(p => p.category === category);
+    productSlider.innerHTML = items.map(p => {
+      const badge = getBadgeClass(p);
+      return `
+      <article class="product-card" data-badge="${badge}">
+        <div class="img-slot product-card-img aspect-1-1" data-fallback="[ ${escapeHtml(p.label)} ]">
+          <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy" />
+        </div>
+        <div class="product-card-body">
+          <span class="product-roast ${badge}">${escapeHtml(p.label)}</span>
+          <h4 class="product-name">${escapeHtml(p.name)}</h4>
+          <p class="product-origin">${escapeHtml(p.origin)}</p>
+          <p class="product-desc">${escapeHtml(p.desc)}</p>
+          <div class="product-card-footer">
+            <p class="product-price">${escapeHtml(p.price)}<small>tax in</small></p>
+            <a href="${SHOP_URL}" target="_blank" rel="noopener" class="btn-text" aria-label="${escapeHtml(p.name)}の詳細を見る">詳細を見る</a>
+          </div>
+        </div>
+      </article>
+    `;
+    }).join('');
+    bindImgFallback(productSlider);
+    productSlider.scrollLeft = 0;
+    updateSliderArrows();
+  }
+
+  function getSliderStep() {
+    const card = productSlider && productSlider.querySelector('.product-card');
+    if (!card) return 240;
+    const styles = getComputedStyle(productSlider);
+    const gap = parseInt(styles.columnGap || styles.gap, 10) || 16;
+    return (card.offsetWidth + gap) * 1.5; // 1〜2枚分スクロール
+  }
+
+  function updateSliderArrows() {
+    if (!productSlider || !sliderPrev || !sliderNext) return;
+    const max = productSlider.scrollWidth - productSlider.clientWidth;
+    sliderPrev.disabled = productSlider.scrollLeft <= 1;
+    sliderNext.disabled = productSlider.scrollLeft >= max - 1;
+  }
+
+  if (productSlider && sliderPrev && sliderNext) {
+    sliderPrev.addEventListener('click', () => productSlider.scrollBy({ left: -getSliderStep(), behavior: 'smooth' }));
+    sliderNext.addEventListener('click', () => productSlider.scrollBy({ left: getSliderStep(), behavior: 'smooth' }));
+    productSlider.addEventListener('scroll', updateSliderArrows, { passive: true });
+    window.addEventListener('resize', updateSliderArrows);
+
+    // Keyboard arrow navigation
+    productSlider.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { productSlider.scrollBy({ left: getSliderStep(), behavior: 'smooth' }); e.preventDefault(); }
+      if (e.key === 'ArrowLeft')  { productSlider.scrollBy({ left: -getSliderStep(), behavior: 'smooth' }); e.preventDefault(); }
+    });
+
+    // Mouse drag-to-scroll
+    let isDown = false, startX = 0, startLeft = 0;
+    productSlider.addEventListener('mousedown', (e) => {
+      isDown = true; productSlider.classList.add('is-grabbing');
+      startX = e.pageX; startLeft = productSlider.scrollLeft;
+    });
+    ['mouseleave', 'mouseup'].forEach(ev => productSlider.addEventListener(ev, () => {
+      isDown = false; productSlider.classList.remove('is-grabbing');
+    }));
+    productSlider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      productSlider.scrollLeft = startLeft - (e.pageX - startX) * 1.4;
+    });
+  }
+
+  // Tab switching
+  productTabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('is-active'));
+      productTabs.forEach(t => {
+        t.classList.remove('is-active');
+        t.setAttribute('aria-selected', 'false');
+      });
       tab.classList.add('is-active');
+      tab.setAttribute('aria-selected', 'true');
+      renderProducts(tab.dataset.category);
+    });
+  });
+
+  // Initial render
+  renderProducts('roasted');
+
+  // =========================================================
+  // Workshops: store selector per card
+  // =========================================================
+  const WORKSHOP_DATA = {
+    drip: {
+      default: 'shintoko',
+      stores: {
+        miyakojima: {
+          name: '宮古島本店', place: '宮古島',
+          status: 'none',
+          method: null,
+          note: '現在、ハンドドリップワークショップの開催予定はありません。最新情報はSNSをご確認ください。',
+          buttonText: '現在開催予定なし',
+          url: null
+        },
+        shintoko: {
+          name: '新所沢店', place: '新所沢',
+          status: 'open',
+          method: '公式LINEまたは店頭予約',
+          note: '平日開催・少人数制で受付中',
+          buttonText: '新所沢店で予約する',
+          url: 'https://dripws.hasabacoffee.com/'
+        },
+        irabu: {
+          name: '伊良部島店', place: '伊良部島',
+          status: 'preparing',
+          method: null,
+          note: '現在オープンに向けて準備中です。詳細が決まり次第お知らせします。',
+          buttonText: '準備中',
+          url: null
+        }
+      }
+    },
+    roast: {
+      default: 'miyakojima',
+      stores: {
+        miyakojima: {
+          name: '宮古島本店', place: '宮古島',
+          status: 'open',
+          method: '店頭またはInstagramのDMで',
+          note: '平日 火曜・木曜開催♪',
+          buttonText: '宮古島本店で予約する',
+          url: 'https://www.prod.instagram.com/hasaba_coffee'
+        },
+        shintoko: {
+          name: '新所沢店', place: '新所沢',
+          status: 'open',
+          method: '公式LINEまたは店頭予約',
+          note: '初心者向け・少人数制で開催中',
+          buttonText: '新所沢店で予約する',
+          url: 'https://workshop.hasabacoffee.com/'
+        },
+        irabu: {
+          name: '伊良部島店', place: '伊良部島',
+          status: 'open',
+          method: 'InstagramのDMで問い合わせ',
+          note: '水曜・土曜に開催中',
+          buttonText: '伊良部島店について問い合わせる',
+          url: 'https://www.prod.instagram.com/hasabacoffee_irabujima'
+        }
+      }
+    }
+  };
+
+  const WORKSHOP_STATUS_LABELS = {
+    open: '開催中',
+    coming: '開催予定あり',
+    inquiry: '要問い合わせ',
+    none: '開催予定なし',
+    preparing: '準備中'
+  };
+
+  function isBookable(status) {
+    return status === 'open' || status === 'coming' || status === 'inquiry';
+  }
+
+  function renderWorkshopCard(card, workshopKey, storeKey) {
+    const config = WORKSHOP_DATA[workshopKey];
+    if (!config) return;
+    const data = config.stores[storeKey];
+    if (!data) return;
+
+    // Tabs active state
+    card.querySelectorAll('.workshop-store-tab').forEach(t => {
+      const active = t.dataset.store === storeKey;
+      t.classList.toggle('is-active', active);
+      t.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    // Place in meta table
+    const placeEl = card.querySelector('.workshop-place');
+    if (placeEl) placeEl.textContent = data.place;
+
+    // Status badge
+    const badge = card.querySelector('.workshop-status-badge');
+    badge.textContent = WORKSHOP_STATUS_LABELS[data.status] || '';
+    badge.setAttribute('data-status', data.status);
+
+    // Selected store
+    card.querySelector('.workshop-selected-store').textContent = `選択中の店舗：${data.name}`;
+
+    // Method
+    const methodEl = card.querySelector('.workshop-reservation-method');
+    methodEl.textContent = data.method ? `予約方法：${data.method}` : '';
+
+    // Note
+    const noteEl = card.querySelector('.workshop-reservation-note');
+    noteEl.textContent = data.note || '';
+
+    // Reserve button
+    const btn = card.querySelector('.workshop-reserve-btn');
+    btn.textContent = data.buttonText;
+    if (isBookable(data.status) && data.url) {
+      btn.setAttribute('href', data.url);
+      btn.setAttribute('target', '_blank');
+      btn.setAttribute('rel', 'noopener');
+      btn.removeAttribute('aria-disabled');
+      btn.removeAttribute('tabindex');
+      btn.classList.remove('is-disabled');
+    } else {
+      btn.setAttribute('href', '#');
+      btn.removeAttribute('target');
+      btn.removeAttribute('rel');
+      btn.setAttribute('aria-disabled', 'true');
+      btn.setAttribute('tabindex', '-1');
+      btn.classList.add('is-disabled');
+    }
+  }
+
+  document.querySelectorAll('.workshop-card[data-workshop]').forEach(card => {
+    const workshopKey = card.dataset.workshop;
+    const config = WORKSHOP_DATA[workshopKey];
+    if (!config) return;
+    card.querySelectorAll('.workshop-store-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        renderWorkshopCard(card, workshopKey, tab.dataset.store);
+      });
+    });
+    // Initial render with default store
+    renderWorkshopCard(card, workshopKey, config.default);
+  });
+
+  // Block click on disabled reserve buttons
+  document.querySelectorAll('.workshop-reserve-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      if (btn.classList.contains('is-disabled') || btn.getAttribute('aria-disabled') === 'true') {
+        e.preventDefault();
+      }
     });
   });
 
