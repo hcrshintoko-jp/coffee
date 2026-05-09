@@ -2288,20 +2288,42 @@
       if (e.key === 'ArrowLeft')  { productSlider.scrollBy({ left: -getSliderStep(), behavior: 'smooth' }); e.preventDefault(); }
     });
 
-    // Mouse drag-to-scroll
-    let isDown = false, startX = 0, startLeft = 0;
+    // Mouse drag-to-scroll with click-vs-drag detection
+    // 単純なクリックではis-grabbing(=pointer-events:none)を発動させない
+    let isDown = false, hasMoved = false, startX = 0, startLeft = 0;
+    const DRAG_THRESHOLD = 5; // px
+
     productSlider.addEventListener('mousedown', (e) => {
-      isDown = true; productSlider.classList.add('is-grabbing');
-      startX = e.pageX; startLeft = productSlider.scrollLeft;
+      isDown = true;
+      hasMoved = false;
+      startX = e.pageX;
+      startLeft = productSlider.scrollLeft;
     });
-    ['mouseleave', 'mouseup'].forEach(ev => productSlider.addEventListener(ev, () => {
-      isDown = false; productSlider.classList.remove('is-grabbing');
-    }));
+    const endDrag = () => {
+      isDown = false;
+      productSlider.classList.remove('is-grabbing');
+    };
+    productSlider.addEventListener('mouseleave', endDrag);
+    productSlider.addEventListener('mouseup', endDrag);
     productSlider.addEventListener('mousemove', (e) => {
       if (!isDown) return;
+      const dx = e.pageX - startX;
+      if (!hasMoved && Math.abs(dx) < DRAG_THRESHOLD) return;
+      if (!hasMoved) {
+        hasMoved = true;
+        productSlider.classList.add('is-grabbing');
+      }
       e.preventDefault();
-      productSlider.scrollLeft = startLeft - (e.pageX - startX) * 1.4;
+      productSlider.scrollLeft = startLeft - dx * 1.4;
     });
+    // ドラッグ後の偽クリックを抑制（カードのリンクを誤発火させない）
+    productSlider.addEventListener('click', (e) => {
+      if (hasMoved) {
+        e.preventDefault();
+        e.stopPropagation();
+        hasMoved = false;
+      }
+    }, true);
   }
 
   // Tab switching
