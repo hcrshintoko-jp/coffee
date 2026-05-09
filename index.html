@@ -617,7 +617,18 @@
   .product-tab:hover { border-color: var(--color-vinyl-brown); }
   .product-tab.is-active { background: var(--color-vinyl-brown); color: var(--color-cream-canvas); border-color: var(--color-vinyl-brown); }
   .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .product-card { background: var(--color-warm-beige); border-radius: var(--radius-card); overflow: hidden; }
+  .product-card {
+    background: var(--color-warm-beige);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .2s ease;
+  }
+  .product-card:hover { transform: translateY(-2px); }
+  .product-card:hover .btn-text { color: var(--color-roast-red); border-bottom-color: var(--color-roast-red); }
+  .product-card:focus-visible { outline: 2px solid var(--color-vinyl-brown); outline-offset: 2px; }
   .product-card-img { background: var(--color-cream-canvas); border-radius: 0; }
   .product-card-body { padding: 16px 16px 20px; }
   .product-roast {
@@ -634,6 +645,7 @@
   .product-roast.dark         { background: #522c25; }
   .product-roast.green        { background: #6f7a45; }
   .product-roast.subscription { background: #5f7f8f; }
+  .product-roast.gift         { background: #854654; }
   .product-roast.goods        { background: #7f6b65; }
 
   /* Subtle category accent: 2px line at the bottom of the product image */
@@ -642,6 +654,7 @@
   .product-card[data-badge="dark"]         { --badge-accent: #522c25; }
   .product-card[data-badge="green"]        { --badge-accent: #6f7a45; }
   .product-card[data-badge="subscription"] { --badge-accent: #5f7f8f; }
+  .product-card[data-badge="gift"]         { --badge-accent: #854654; }
   .product-card[data-badge="goods"]        { --badge-accent: #7f6b65; }
   .product-card[data-badge] .product-card-img::after {
     content: "";
@@ -1541,7 +1554,7 @@
           <span>初回限定</span>
         </div>
         <div class="cta-stack" style="align-items:flex-start;">
-          <a href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary">お試しセットを見る</a>
+          <a href="https://hasabacoffee.theshop.jp/items/144073495" target="_blank" rel="noopener" class="btn btn-primary">お試しセットを見る</a>
           <span class="cta-microcopy light">在庫あり・通常2-4日でお届け</span>
         </div>
       </div>
@@ -1551,6 +1564,7 @@
       <button class="product-tab is-active" data-category="roasted" role="tab" aria-selected="true">焙煎豆</button>
       <button class="product-tab" data-category="green" role="tab" aria-selected="false">生豆</button>
       <button class="product-tab" data-category="subscription" role="tab" aria-selected="false">定期便</button>
+      <button class="product-tab" data-category="gift" role="tab" aria-selected="false">ギフト</button>
       <button class="product-tab" data-category="goods" role="tab" aria-selected="false">焙煎器・グッズ</button>
     </div>
 
@@ -1846,7 +1860,7 @@
       </div>
       <div class="about-content reveal">
         <span class="about-en">About Us</span>
-        <h2>沖縄・宮古島から、<br />焙煎の喜びを、世界へ。</h2>
+        <h2>沖縄・宮古島から、<br />焙煎の喜びを世界へ。</h2>
         <p>HASABA COFFEE ROASTERS®は、沖縄・宮古島で生まれた焙煎所です。「珈琲焙煎の民衆化」をビジョンに、誰もが気軽に、楽しく、美味しくコーヒーを楽しめる文化を広げています。</p>
         <dl class="about-mission">
           <dt>Mission</dt>
@@ -1861,7 +1875,7 @@
 
 <!-- =========================================================
      MEDIA MENTIONS
-     ========================================================= -->
+     ========================================================= 
 <section class="media-mentions">
   <div class="container">
     <p class="media-mentions-label">Featured In / メディア掲載</p>
@@ -1880,11 +1894,11 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- =========================================================
      COLUMN & NEWS
-     ========================================================= -->
+     =========================================================
 <section id="column" class="section">
   <div class="container">
     <div class="two-col">
@@ -1958,7 +1972,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- =========================================================
      FAQ
@@ -2024,8 +2038,8 @@
 <section class="share-section" aria-labelledby="share-title">
   <div class="share-section-inner reveal">
     <span class="section-label">Share</span>
-    <h3 id="share-title" class="share-title">気に入ったら、シェアしてください</h3>
-    <p class="share-lead">焙煎したてのコーヒーの魅力を、友人や家族にも。</p>
+    <h3 id="share-title" class="share-title">気に入ったらシェアしてください</h3>
+    <p class="share-lead">焙煎したてのコーヒーの魅力を友人や家族にも。</p>
     <div class="share-buttons">
       <a href="#" target="_blank" rel="noopener" class="share-btn" data-share="x" aria-label="Xで共有">
         <span class="share-btn-icon">𝕏</span>
@@ -2141,44 +2155,48 @@
   // =========================================================
   const PRODUCTS = [
     // 焙煎豆 (roasted) — 8 items
-    { category: 'roasted', name: 'パプアニューギニア コルブラン', origin: 'Floral · Fruity / 190g', desc: '華やかな香りとフルーティーな酸味。朝の一杯に。', label: 'Light', price: '¥1,986', image: 'images/product-01.jpg' },
-    { category: 'roasted', name: 'タンザニア コンゴニ', origin: 'Bright · Clean / 160g', desc: '軽やかでスッキリ、キリマンジャロの爽やかさ。', label: 'Medium', price: '¥1,810', image: 'images/product-02.jpg' },
-    { category: 'roasted', name: 'インドネシア マンデリン', origin: 'Deep · Rich / 135g', desc: '深いコクと香ばしさ。アイスコーヒーにも。', label: 'Dark', price: '¥1,639', image: 'images/product-03.jpg' },
-    { category: 'roasted', name: 'コスタリカ サンタルシア', origin: 'Floral · Organic / 100g', desc: 'EM菌農法。フローラルな香りと透明感のある味。', label: 'Light', price: '¥978', image: 'images/product-04.jpg' },
-    { category: 'roasted', name: 'エチオピア モカ シダモ', origin: 'Mocha · Juicy / 150g', desc: 'コーヒーの原点。モカフレーバーとジューシーな余韻。', label: 'Light', price: '¥1,720', image: 'images/product-05.jpg' },
-    { category: 'roasted', name: 'ケニア エンブ', origin: 'Wild · Aromatic / 150g', desc: 'ワイルドさと極上のアロマ。一目置かれる一杯。', label: 'Medium', price: '¥1,950', image: 'images/product-06.jpg' },
-    { category: 'roasted', name: 'イーストティモール レテフォホ', origin: 'Citrus · Body / 150g', desc: '柑橘系の個性的な香りとしっかりしたコク。', label: 'Medium', price: '¥1,580', image: 'images/product-07.jpg' },
-    { category: 'roasted', name: '3種飲み比べセット', origin: '浅・中・深 / ミニボトル×3本', desc: '焙煎度の違いを一度に体感できる、初心者向けセット。', label: 'Set', price: '¥3,500', image: 'images/product-08.jpg' },
+    { category: 'roasted', name: 'お試し3種飲み比べセット', origin: '浅・中・深 / ミニボトル×3本', desc: '焙煎度の違いを一度に体感できる、お得な初心者向けセット。', label: 'Set', price: '¥3,600', image: 'images/product-08.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073495' },
+    { category: 'roasted', name: 'パプアニューギニア コルブラン モリタ区画', origin: 'Floral · Fruity / 190g', desc: '華やかな香りとフルーティーな酸味。朝の一杯に。', label: 'Light', price: '¥1,986', image: 'images/product-01.jpg', url: 'https://hasabacoffee.theshop.jp/items/134084642' },
+    { category: 'roasted', name: 'タンザニア コンゴニ', origin: 'Bright · Clean / 160g', desc: '軽やかでスッキリ、キリマンジャロの爽やかさ。', label: 'Medium', price: '¥1,810', image: 'images/product-02.jpg', url: 'https://hasabacoffee.theshop.jp/items/128860234' },
+    { category: 'roasted', name: 'インドネシア マンデリン', origin: 'Deep · Rich / 135g', desc: '深いコクと香ばしさ。アイスコーヒーにも。', label: 'Dark', price: '¥1,639', image: 'images/product-03.jpg', url: 'https://hasabacoffee.theshop.jp/items/128859947' },
+    { category: 'roasted', name: 'コスタリカ サンタルシア', origin: 'Floral · EM / 160g', desc: 'EM菌農法。フローラルな香りと透明感のある味。', label: 'Medium', price: '¥2,110', image: 'images/product-04.jpg', url: 'https://hasabacoffee.theshop.jp/items/144072948' },
+    { category: 'roasted', name: 'エチオピア モカ シダモ', origin: 'Mocha · Juicy / 160g', desc: 'コーヒーの原点。モカフレーバーとジューシーな余韻。', label: 'Medium', price: '¥2,010', image: 'images/product-05.jpg', url: 'https://hasabacoffee.theshop.jp/items/144072738' },
+    { category: 'roasted', name: 'ケニア エンブ', origin: 'Wild · Aromatic / 135g', desc: 'ワイルドさと極上のアロマ。一目置かれる一杯。', label: 'Dark', price: '¥1,650', image: 'images/product-06.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073131' },
+    { category: 'roasted', name: 'イーストティモール レテフォホ', origin: 'Citrus · Body / 190g', desc: '柑橘系の個性的な香りとしっかりしたコク。', label: 'Light', price: '¥1,890', image: 'images/product-07.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073186' },
 
     // 生豆 (green) — 8 items
-    { category: 'green', name: 'エチオピア モカ シダモ 生豆', origin: 'New Crop / 100g', desc: '自家焙煎の練習に最適。モカフレーバーの代表格。', label: 'Green', price: '¥924', image: 'images/product-09.jpg' },
-    { category: 'green', name: 'ケニア エンブ 生豆', origin: 'New Crop / 100g', desc: '深いコクと香り。焙煎しがいのある高級豆。', label: 'Green', price: '¥889', image: 'images/product-10.jpg' },
-    { category: 'green', name: 'コスタリカ サンタルシア 生豆', origin: 'Organic / 100g', desc: 'EM菌農法による無農薬栽培の透明感ある一品。', label: 'Green', price: '¥978', image: 'images/product-11.jpg' },
-    { category: 'green', name: 'イーストティモール 生豆', origin: 'New Crop / 100g', desc: '個性的な香りと柑橘系の余韻。コクも豊か。', label: 'Green', price: '¥825', image: 'images/product-12.jpg' },
-    { category: 'green', name: 'パプアニューギニア 生豆', origin: 'New Crop / 100g', desc: '華やかさとボディ感のバランスが秀逸。', label: 'Green', price: '¥870', image: 'images/product-13.jpg' },
-    { category: 'green', name: 'タンザニア 生豆', origin: 'New Crop / 100g', desc: 'キリマンジャロ系の爽やかな酸味と切れ味。', label: 'Green', price: '¥861', image: 'images/product-14.jpg' },
-    { category: 'green', name: 'インドネシア マンデリン 生豆', origin: 'New Crop / 100g', desc: '深煎り向け。コクと口当たりのキレが魅力。', label: 'Green', price: '¥885', image: 'images/product-15.jpg' },
-    { category: 'green', name: '生豆お試し3種セット', origin: '100g×3種 / アソート', desc: '産地の違いを焙煎しながら比べられる入門セット。', label: 'Set', price: '¥2,500', image: 'images/product-16.jpg' },
+    { category: 'green', name: '生豆お試し3種セット', origin: '100g×3種 / アソート', desc: '産地の違いを焙煎しながら比べられる入門セット。', label: 'Set', price: '¥2,500', image: 'images/product-16.jpg', url: 'https://hasabacoffee.theshop.jp/items/144081068' },
+    { category: 'green', name: 'エチオピア モカ シダモ 生豆', origin: 'New Crop / Natural / 100g', desc: '自家焙煎の練習に最適。モカフレーバーの代表格。', label: 'Green', price: '¥924', image: 'images/product-09.jpg', url: 'https://hasabacoffee.theshop.jp/items/128560013' },
+    { category: 'green', name: 'ケニア エンブ 生豆', origin: 'New Crop / Washed / 100g', desc: '深いコクと香り。焙煎しがいのある高級豆。', label: 'Green', price: '¥889', image: 'images/product-10.jpg', url: 'https://hasabacoffee.theshop.jp/items/128560737' },
+    { category: 'green', name: 'コスタリカ サンタルシア 生豆', origin: 'EM / Honey / 100g', desc: 'EM菌農法による無農薬栽培の透明感ある一品。', label: 'Green', price: '¥978', image: 'images/product-11.jpg', url: 'https://hasabacoffee.theshop.jp/items/128558159' },
+    { category: 'green', name: 'イーストティモール 生豆', origin: 'New Crop / Washed / 100g', desc: '個性的な香りと柑橘系の余韻。コクも豊か。', label: 'Green', price: '¥825', image: 'images/product-12.jpg', url: 'https://hasabacoffee.theshop.jp/items/128560928' },
+    { category: 'green', name: 'パプアニューギニア 生豆', origin: 'New Crop / Washed / 100g', desc: '華やかさとボディ感のバランスが秀逸。', label: 'Green', price: '¥870', image: 'images/product-13.jpg', url: 'https://hasabacoffee.theshop.jp/items/132449473' },
+    { category: 'green', name: 'タンザニア 生豆', origin: 'New Crop / Washed / 100g', desc: 'キリマンジャロ系の爽やかな酸味と切れ味。', label: 'Green', price: '¥861', image: 'images/product-14.jpg', url: 'https://hasabacoffee.theshop.jp/items/128559675' },
+    { category: 'green', name: 'インドネシア マンデリン 生豆', origin: 'New Crop / Wet Hulling / 100g', desc: '深煎り向け。コクと口当たりのキレが魅力。', label: 'Green', price: '¥885', image: 'images/product-15.jpg', url: 'https://hasabacoffee.theshop.jp/items/128561177' },
 
-    // 定期便 (subscription) — 8 items
-    { category: 'subscription', name: '焙煎豆スタンダード便', origin: '毎月・3種ミニボトル', desc: '人気の焙煎豆を3種お試しサイズで毎月お届け。', label: 'Monthly', price: '¥2,480', image: 'images/product-17.jpg' },
-    { category: 'subscription', name: '焙煎豆プレミアム便', origin: '毎月・3種フルボトル', desc: 'たっぷり楽しめる、フルサイズ3種セット。', label: 'Monthly', price: '¥4,800', image: 'images/product-18.jpg' },
-    { category: 'subscription', name: '生豆飲み比べ便', origin: '2ヶ月毎・100g×3種', desc: '産地の違いを楽しむ、自家焙煎ファンの定番。', label: 'Bi-Monthly', price: '¥1,950', image: 'images/product-19.jpg' },
-    { category: 'subscription', name: '生豆たっぷり便', origin: '2ヶ月毎・300g×3種', desc: 'じっくり焙煎を楽しみたい方への大容量プラン。', label: 'Bi-Monthly', price: '¥5,500', image: 'images/product-20.jpg' },
-    //{ category: 'subscription', name: '浅煎り定期便', origin: '毎月・浅煎り厳選', desc: 'フルーティーで華やかな浅煎りだけを集めたコース。', label: 'Light', price: '¥2,500', image: 'images/product-21.jpg' },
-    //{ category: 'subscription', name: '深煎り定期便', origin: '毎月・深煎り厳選', desc: 'コクと香ばしさが楽しめる深煎りファン向け。', label: 'Dark', price: '¥2,500', image: 'images/product-22.jpg' },
-    //{ category: 'subscription', name: '初回お試し3種便', origin: '隔月・初回限定', desc: '初めての方向け。気軽に始められる入門プラン。', label: 'Trial', price: '¥1,950', image: 'images/product-23.jpg' },
-    //{ category: 'subscription', name: '季節のおまかせ便', origin: '季節毎・厳選1種', desc: '季節に合う1種を厳選。送料込み・ギフト対応可。', label: 'Seasonal', price: '¥3,000', image: 'images/product-24.jpg' },
+    // 定期便 (subscription) — 3 items
+    { category: 'subscription', name: '焙煎豆スタンダード便', origin: '毎月・3種ミニボトル', desc: '人気の焙煎豆を3種お試しサイズで毎月お届け。', label: 'Monthly', price: '¥2,480', image: 'images/product-17.jpg', url: 'https://hasabacoffee.theshop.jp/items/141139263' },
+    { category: 'subscription', name: '生豆飲み比べ便 100g x3', origin: '2ヶ月毎・100g×3種', desc: '産地の違いを楽しむ、自家焙煎ファンの定番。', label: 'Bi-Monthly', price: '¥1,950', image: 'images/product-19.jpg', url: 'https://hasabacoffee.theshop.jp/items/130489212' },
+    { category: 'subscription', name: '生豆たっぷり便 300g x3', origin: '2ヶ月毎・300g×3種', desc: 'じっくり焙煎を楽しみたい方への大容量プラン。', label: 'Bi-Monthly', price: '¥5,500', image: 'images/product-20.jpg', url: 'https://hasabacoffee.theshop.jp/items/130489397' },
 
-    // 焙煎器・グッズ (goods) — 8 items
-    { category: 'goods', name: '新型ロースター', origin: '焙煎器 / 単品', desc: '自宅で本格焙煎が楽しめる、コンパクト型ロースター。', label: 'Roaster', price: '¥8,800', image: 'images/product-25.jpg' },
+    // ギフト (gift) — 4 items
+    { category: 'gift', name: '旬の豆ギフトボックス', origin: '季節の3種セット / ギフトラッピング', desc: '旬の豆を厳選してお届けする、コーヒー好きへの特別なギフト。', label: 'Box', price: '¥6,000', image: 'images/product-37.jpg', url: 'https://hasabacoffee.theshop.jp/items/143492554' },
+    { category: 'gift', name: '3種飲み比べ ミニボトルセット', origin: '浅・中・深 / ミニボトル×3本', desc: '焙煎度の違いを楽しむ、カジュアルなギフトに最適。', label: 'Set', price: '¥3,600', image: 'images/product-08.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073495' },
+    { category: 'gift', name: 'ドリップバッグセット 3個入', origin: '浅・中・深 / ドリップバッグ×3', desc: 'お湯を注ぐだけで本格コーヒー。ちょっとしたお礼に。', label: 'Drip', price: '¥1,200', image: 'images/product-38.jpg', url: 'https://hasabacoffee.theshop.jp/items/144074726' },
+    { category: 'gift', name: 'ドリップバッグセット 6個入', origin: '6種アソート / ドリップバッグ×6', desc: 'バリエーション豊かなドリップバッグ。長く楽しめる贈り物。', label: 'Drip', price: '¥2,400', image: 'images/product-39.jpg', url: 'https://hasabacoffee.theshop.jp/items/144075973' },
+
+    // 焙煎器・グッズ (goods) — 5 items (URL未提供のためショップTOPへフォールバック)
+    { category: 'goods', name: '新型オリジナルロースター', origin: '焙煎器 / 単品', desc: '自宅で本格焙煎が楽しめる、コンパクト型ロースター。', label: 'Roaster', price: '¥8,800', image: 'images/product-25.jpg' },
     { category: 'goods', name: 'ロースタースターターセット', origin: '焙煎器 + 生豆 100g', desc: '初めて焙煎する方向け。器具一式と生豆がセットに。', label: 'Set', price: '¥15,000', image: 'images/product-26.jpg' },
-    { category: 'goods', name: 'ハンドドリップ基本セット', origin: 'ドリッパー・サーバー他', desc: 'ドリップに必要な道具一式。豆ミニボトル付き。', label: 'Set', price: '¥3,800', image: 'images/product-27.jpg' },
-    { category: 'goods', name: '電動コーヒーミルセット', origin: '電動ミル + 焙煎豆', desc: '家庭で挽きたてを楽しむ、入門ミルセット。', label: 'Set', price: '¥4,500', image: 'images/product-28.jpg' },
-    { category: 'goods', name: 'ハンドドリップDXセット', origin: '基本セット + 電動ミル', desc: '一通り揃う、ドリップ・自家挽きの完全セット。', label: 'Premium', price: '¥7,400', image: 'images/product-29.jpg' },
-    // { category: 'goods', name: '専用ペーパーフィルター', origin: '100枚入', desc: 'HASABAドリッパー対応の専用フィルター。', label: 'Filter', price: '¥600', image: 'images/product-30.jpg' },
-    // { category: 'goods', name: '耐圧保存ボトル', origin: '空ボトル / 単品', desc: '焙煎豆の鮮度を保つ、HASABA独自の専用ボトル。', label: 'Bottle', price: '¥300', image: 'images/product-31.jpg' },
-    // { category: 'goods', name: '宮古島やちむんマグ', origin: '宮古島ローカル / 1個', desc: '伝統工芸「やちむん」によるオリジナルマグカップ。', label: 'Local', price: '¥2,500', image: 'images/product-32.jpg' }
+    { category: 'goods', name: 'ハンドドリップ基本セット', origin: 'ドリッパー・サーバー他', desc: '【店頭限定】ドリップに必要な道具一式。豆ミニボトル付き。', label: 'Set', price: '¥3,800', image: 'images/product-27.jpg' },
+    { category: 'goods', name: '電動コーヒーミルセット', origin: '電動ミル + 焙煎豆', desc: '【店頭限定】家庭で挽きたてを楽しむ、入門ミルセット。', label: 'Set', price: '¥4,500', image: 'images/product-28.jpg' },
+    { category: 'goods', name: 'ハンドドリップDXセット', origin: '基本セット + 電動ミル', desc: '【店頭限定】一通り揃う、ドリップ・自家挽きの完全セット。', label: 'Premium', price: '¥7,400', image: 'images/product-29.jpg' },
+    // 以下、commented-out / 将来追加予定
+    //{ category: 'subscription', name: '浅煎り定期便', label: 'Light', price: '¥2,500', image: 'images/product-21.jpg' },
+    //{ category: 'subscription', name: '深煎り定期便', label: 'Dark', price: '¥2,500', image: 'images/product-22.jpg' },
+    //{ category: 'goods', name: '専用ペーパーフィルター', label: 'Filter', price: '¥600', image: 'images/product-30.jpg' },
+    //{ category: 'goods', name: '耐圧保存ボトル', label: 'Bottle', price: '¥300', image: 'images/product-31.jpg' },
+    //{ category: 'goods', name: '宮古島やちむんマグ', label: 'Local', price: '¥2,500', image: 'images/product-32.jpg' }
   ];
 
   const SHOP_URL = 'https://hasabacoffee.theshop.jp/';
@@ -2209,6 +2227,7 @@
     // 他カテゴリはカテゴリ名がそのままバッジクラス
     if (p.category === 'green') return 'green';
     if (p.category === 'subscription') return 'subscription';
+    if (p.category === 'gift') return 'gift';
     if (p.category === 'goods') return 'goods';
     return 'medium';
   }
@@ -2218,8 +2237,9 @@
     const items = PRODUCTS.filter(p => p.category === category);
     productSlider.innerHTML = items.map(p => {
       const badge = getBadgeClass(p);
+      const url = p.url || SHOP_URL;
       return `
-      <article class="product-card" data-badge="${badge}">
+      <a class="product-card" data-badge="${badge}" href="${escapeHtml(url)}" target="_blank" rel="noopener" aria-label="${escapeHtml(p.name)}の商品詳細を見る">
         <div class="img-slot product-card-img aspect-1-1" data-fallback="[ ${escapeHtml(p.label)} ]">
           <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy" />
         </div>
@@ -2230,10 +2250,10 @@
           <p class="product-desc">${escapeHtml(p.desc)}</p>
           <div class="product-card-footer">
             <p class="product-price">${escapeHtml(p.price)}<small>tax in</small></p>
-            <a href="${SHOP_URL}" target="_blank" rel="noopener" class="btn-text" aria-label="${escapeHtml(p.name)}の詳細を見る">詳細を見る</a>
+            <span class="btn-text">詳細を見る →</span>
           </div>
         </div>
-      </article>
+      </a>
     `;
     }).join('');
     bindImgFallback(productSlider);
