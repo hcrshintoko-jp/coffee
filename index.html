@@ -544,6 +544,26 @@
   @media (min-width: 720px) {
     .three-ways-grid { grid-template-columns: repeat(3, 1fr); }
   }
+  /* Mobile-only: 横スライド カルーセル */
+  @media (max-width: 719px) {
+    .three-ways-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 14px;
+      padding: 4px 24px 18px;
+      margin-left: -24px;
+      margin-right: -24px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .three-ways-grid::-webkit-scrollbar { display: none; }
+    .three-ways-grid > .way-card {
+      flex: 0 0 86%;
+      scroll-snap-align: start;
+    }
+  }
 
   /* =========================================================
      Freshness
@@ -880,6 +900,26 @@
   .workshop-card-cta { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
   .workshop-card .btn { width: 100%; }
   @media (min-width: 880px) { .workshop-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
+  /* Mobile-only: 横スライド カルーセル */
+  @media (max-width: 879px) {
+    .workshop-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 14px;
+      padding: 4px 24px 18px;
+      margin-left: -24px;
+      margin-right: -24px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .workshop-grid::-webkit-scrollbar { display: none; }
+    .workshop-grid > .workshop-card {
+      flex: 0 0 88%;
+      scroll-snap-align: start;
+    }
+  }
 
   /* =========================================================
      Workshop Store Selector
@@ -1319,6 +1359,53 @@
   @media (min-width: 880px) { .sticky-cta { display: none; } }
 
   /* =========================================================
+     Floating Gift Button (mobile only)
+     ========================================================= */
+  .floating-gift { display: none; }
+  @media (max-width: 879px) {
+    .floating-gift {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      right: 14px;
+      bottom: calc(86px + env(safe-area-inset-bottom));
+      z-index: 96;
+      padding: 13px 18px;
+      background: #854654;
+      color: var(--color-cream-canvas);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(82, 44, 37, 0.28);
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+      min-height: 44px;
+      border: 1px solid rgba(255, 249, 242, 0.15);
+    }
+    .floating-gift::before {
+      content: "";
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--color-sunbeam-yellow);
+      margin-right: 8px;
+    }
+    .floating-gift:hover,
+    .floating-gift:focus-visible {
+      background: #6f3a47;
+      box-shadow: 0 6px 18px rgba(82, 44, 37, 0.4);
+      transform: translateY(-2px);
+      outline: none;
+    }
+    .floating-gift:active { transform: scale(0.97); }
+  }
+  /* スクロール量がヘッダー分残るよう scroll-margin */
+  .product-tab[data-category="gift"] { scroll-margin-top: 80px; }
+
+  /* =========================================================
      Reveal on scroll
      ========================================================= */
   .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
@@ -1564,7 +1651,7 @@
       <button class="product-tab is-active" data-category="roasted" role="tab" aria-selected="true">焙煎豆</button>
       <button class="product-tab" data-category="green" role="tab" aria-selected="false">生豆</button>
       <button class="product-tab" data-category="subscription" role="tab" aria-selected="false">定期便</button>
-      <button class="product-tab" data-category="gift" role="tab" aria-selected="false">ギフト</button>
+      <button class="product-tab" data-category="gift" role="tab" aria-selected="false" id="gift">ギフト</button>
       <button class="product-tab" data-category="goods" role="tab" aria-selected="false">焙煎器・グッズ</button>
     </div>
 
@@ -2124,6 +2211,9 @@
 <!-- =========================================================
      STICKY MOBILE CTA
      ========================================================= -->
+<!-- Floating Gift Button (mobile only) -->
+<a href="#gift" class="floating-gift" aria-label="ギフトラインナップを見る">ギフト</a>
+
 <div class="sticky-cta" id="sticky-cta">
   <a href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="sticky-primary">
     豆を購入する
@@ -2594,6 +2684,24 @@
       }
     });
   });
+
+  // =========================================================
+  // Floating Gift Button: ギフトタブを有効化して商品セクションへスクロール
+  // =========================================================
+  const floatingGift = document.querySelector('.floating-gift');
+  if (floatingGift) {
+    floatingGift.addEventListener('click', (e) => {
+      e.preventDefault();
+      const giftTab = document.querySelector('.product-tab[data-category="gift"]');
+      if (giftTab && !giftTab.classList.contains('is-active')) {
+        giftTab.click();
+      }
+      const products = document.getElementById('products');
+      if (products) {
+        products.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
 </script>
 
 </body>
