@@ -1595,6 +1595,83 @@
       will-change: auto;
     }
   }
+
+  /* =========================================================
+     SP テキスト折り返し最適化 (max-width: 768px)
+     目的: 日本語禁則を有効化し、句読点・記号が行頭/行末に来ない
+     方針: 触るのは折り返し系プロパティのみ。レイアウト・余白は不変
+     ========================================================= */
+  @media (max-width: 768px) {
+    /* 1. 本文・見出しに日本語禁則 (line-break: strict) を効かせる */
+    .hero-subtitle,
+    .hero-category,
+    .brand-statement,
+    .brand-message p,
+    .section-title,
+    .section-lead,
+    .way-card h3,
+    .way-card p,
+    .freshness-content > p,
+    .freshness-point h4,
+    .freshness-point p,
+    .voice-card p,
+    .subscription h2,
+    .subscription p,
+    .workshop-card h3,
+    .workshop-card .lead,
+    .workshop-reservation-method,
+    .workshop-reservation-note,
+    .workshop-selected-store,
+    .product-name,
+    .product-desc,
+    .store-card h3,
+    .about-content h2,
+    .about-content p,
+    .about-mission dd,
+    .faq-q,
+    .faq-a-inner,
+    .column-title,
+    .news-title,
+    .final-cta h2,
+    .final-cta p,
+    .share-title,
+    .share-lead,
+    .starter-content h3,
+    .starter-content p {
+      word-break: normal;
+      overflow-wrap: break-word;
+      line-break: strict;
+    }
+
+    /* 2. 折り返したくない要素: 価格・短ラベル・タブ */
+    .product-price,
+    .workshop-meta dd,
+    .trust-badge strong,
+    .workshop-store-tab,
+    .product-tab {
+      white-space: nowrap;
+    }
+
+    /* 3. 住所: 半角数字+ハイフンを尊重した自然な改行 */
+    .store-info dd {
+      word-break: normal;
+      overflow-wrap: break-word;
+      line-height: 1.7;
+    }
+
+    /* 4. ボタン内の長文 ("伊良部島店について問い合わせる" 等) の不自然な折れ防止 */
+    .btn,
+    .workshop-reserve-btn {
+      word-break: normal;
+      overflow-wrap: break-word;
+      line-break: strict;
+    }
+
+    /* 5. freshness-point だけ line-height が 1.75 で詰まっていたため微調整 */
+    .freshness-point p {
+      line-height: 1.85;
+    }
+  }
 </style>
 </head>
 <body>
