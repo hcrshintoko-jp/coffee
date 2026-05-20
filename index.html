@@ -1410,6 +1410,149 @@
      ========================================================= */
   .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* =========================================================
+     Parallax Layers — subtle depth, motion-aware
+     ========================================================= */
+
+  /* Layer A: Hero background parallax (driven by JS, GPU accelerated) */
+  .parallax-bg {
+    will-change: transform;
+    transform: translate3d(0, var(--scroll-offset, 0px), 0);
+  }
+
+  /* Layer B: Section decoration layer (pure CSS, pseudo-element) */
+  .parallax-decor { position: relative; overflow: hidden; }
+  .parallax-decor::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.9s ease;
+  }
+  .parallax-decor.is-in-view::before { opacity: 1; }
+  .parallax-decor > * { position: relative; z-index: 1; }
+
+  /* Variant: warm radial glow (right-bottom) */
+  .parallax-decor--warm::before {
+    background: radial-gradient(
+      640px 420px at 100% 100%,
+      rgba(196, 101, 0, 0.10) 0%,
+      rgba(196, 101, 0, 0.04) 35%,
+      transparent 70%
+    );
+  }
+
+  /* Variant: paper grain (subtle dual gradient) */
+  .parallax-decor--paper::before {
+    background:
+      radial-gradient(800px 500px at 8% 0%, rgba(82, 44, 37, 0.05) 0%, transparent 60%),
+      radial-gradient(720px 520px at 92% 100%, rgba(151, 126, 119, 0.07) 0%, transparent 65%);
+  }
+
+  /* Variant: faint bean dots */
+  .parallax-decor--bean::before {
+    background:
+      radial-gradient(circle at 12% 22%, rgba(82, 44, 37, 0.07) 0 4px, transparent 5px),
+      radial-gradient(circle at 88% 78%, rgba(82, 44, 37, 0.06) 0 5px, transparent 6px),
+      radial-gradient(circle at 78% 30%, rgba(82, 44, 37, 0.06) 0 3px, transparent 4px),
+      radial-gradient(circle at 22% 75%, rgba(82, 44, 37, 0.06) 0 4px, transparent 5px),
+      radial-gradient(900px 500px at 50% 50%, rgba(255, 249, 242, 0) 0%, transparent 100%);
+  }
+
+  /* Layer C: Card lift on entry */
+  .parallax-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .parallax-card.is-in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Mobile reduction: 装飾を薄く、カードlift も短く */
+  @media (max-width: 720px) {
+    .parallax-decor.is-in-view::before { opacity: 0.55; }
+  }
+  @media (pointer: coarse) {
+    .parallax-card {
+      transform: translateY(12px);
+      transition-duration: 0.55s;
+    }
+  }
+
+  /* Accessibility: reduced motion → 全演出 OFF */
+  @media (prefers-reduced-motion: reduce) {
+    .parallax-bg { transform: none !important; will-change: auto; }
+    .parallax-card,
+    .parallax-card.is-in-view {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    .parallax-decor::before {
+      opacity: 0.4 !important;
+      transition: none !important;
+    }
+  }
+
+  /* =========================================================
+     Parallax Shapes (dummy decorative SVG elements)
+     visible decoration that moves with scroll for clear depth
+     ========================================================= */
+  .parallax-shape {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+    transform: translate3d(0, var(--parallax-y, 0px), 0) rotate(var(--rotation, 0deg));
+    opacity: var(--shape-opacity, 0.32);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: opacity 0.4s ease;
+  }
+  /* インラインSVG（旧ダミー）は非表示 — 背景画像のHCRに切替済み */
+  .parallax-shape > svg { display: none; }
+
+  /* Position + image variants (HCR-01〜08 を割当・一部リユース) */
+  .parallax-shape--brand-1   { top: 12%;  right: 6%;   width: 130px; height: 175px; --rotation: -18deg; background-image: url('images/HCR-01.svg'); }
+  .parallax-shape--ways-1    { top: 8%;   left: 4%;    width: 100px; height: 130px; --rotation: 22deg;  background-image: url('images/HCR-02.svg'); }
+  .parallax-shape--ways-2    { bottom: 6%; right: 5%;  width: 115px; height: 150px; --rotation: -28deg; background-image: url('images/HCR-03.svg'); }
+  .parallax-shape--fresh-1   { top: 10%;  right: 4%;   width: 90px;  height: 160px; --shape-opacity: 0.38; background-image: url('images/HCR-04.svg'); }
+  .parallax-shape--fresh-2   { bottom: 15%; left: 3%;  width: 95px;  height: 120px; --rotation: 16deg;  background-image: url('images/HCR-05.svg'); }
+  .parallax-shape--prod-1    { top: 4%;   left: 4%;    width: 95px;  height: 120px; --rotation: 14deg;  background-image: url('images/HCR-06.svg'); }
+  .parallax-shape--prod-2    { bottom: 12%; right: 4%; width: 115px; height: 145px; --rotation: -12deg; background-image: url('images/HCR-07.svg'); }
+  .parallax-shape--workshop-1{ top: 8%;   right: 5%;   width: 115px; height: 150px; --rotation: 26deg;  background-image: url('images/HCR-08.svg'); }
+  .parallax-shape--workshop-2{ bottom: 8%; left: 4%;   width: 90px;  height: 115px; --rotation: -22deg; background-image: url('images/HCR-01.svg'); }
+  .parallax-shape--stores-1  { top: 10%;  left: 3%;    width: 105px; height: 135px; --rotation: 18deg;  background-image: url('images/HCR-02.svg'); }
+  .parallax-shape--stores-2  { bottom: 10%; right: 4%; width: 90px;  height: 115px; --rotation: -16deg; background-image: url('images/HCR-03.svg'); }
+  .parallax-shape--story-1   { top: 14%;  right: 4%;   width: 120px; height: 155px; --rotation: 12deg;  background-image: url('images/HCR-04.svg'); }
+
+  /* Mobile: shrink decorations to avoid clutter */
+  @media (max-width: 720px) {
+    .parallax-shape {
+      opacity: calc(var(--shape-opacity, 0.16) * 0.75);
+      transform: translate3d(0, var(--parallax-y, 0px), 0) rotate(var(--rotation, 0deg)) scale(0.65);
+    }
+    /* Hide secondary shapes on small screens */
+    .parallax-shape--ways-2,
+    .parallax-shape--fresh-2,
+    .parallax-shape--prod-2,
+    .parallax-shape--workshop-2,
+    .parallax-shape--stores-2 { display: none; }
+  }
+
+  /* Reduced motion: keep visible but stop moving */
+  @media (prefers-reduced-motion: reduce) {
+    .parallax-shape {
+      transform: rotate(var(--rotation, 0deg)) !important;
+      will-change: auto;
+    }
+  }
 </style>
 </head>
 <body>
@@ -1461,7 +1604,7 @@
      HERO
      ========================================================= -->
 <section id="top" class="hero">
-  <div class="hero-media">
+  <div class="hero-media parallax-bg">
     <video autoplay muted loop playsinline poster="images/hero-poster.jpg">
       <source src="images/hero.webm" type="video/webm" />
       <source src="images/hero.mp4" type="video/mp4" />
@@ -1503,7 +1646,10 @@
 <!-- =========================================================
      BRAND MESSAGE
      ========================================================= -->
-<section class="brand-message">
+<section class="brand-message parallax-decor parallax-decor--warm">
+  <div class="parallax-shape parallax-shape--brand-1" data-parallax-speed="0.30" aria-hidden="true">
+    <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="55" rx="33" ry="50"/><path d="M40 8 C48 35 48 75 40 102" stroke="rgba(255,249,242,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
   <div class="brand-message-inner reveal">
     <p class="brand-question">― 今飲んでいるコーヒー、本当に「フレッシュ」ですか？</p>
     <p class="brand-statement">
@@ -1517,7 +1663,13 @@
 <!-- =========================================================
      THREE WAYS
      ========================================================= -->
-<section class="section">
+<section class="section parallax-decor parallax-decor--warm">
+  <div class="parallax-shape parallax-shape--ways-1" data-parallax-speed="0.18" aria-hidden="true">
+    <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="55" rx="33" ry="50"/><path d="M40 8 C48 35 48 75 40 102" stroke="rgba(255,249,242,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
+  <div class="parallax-shape parallax-shape--ways-2" data-parallax-speed="-0.22" aria-hidden="true">
+    <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="55" rx="33" ry="50"/><path d="M40 8 C48 35 48 75 40 102" stroke="rgba(255,249,242,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
   <div class="container">
     <div class="section-head center reveal">
       <span class="section-label">How To Enjoy</span>
@@ -1526,7 +1678,7 @@
     </div>
     <div class="three-ways-grid">
 
-      <article class="way-card reveal">
+      <article class="way-card reveal parallax-card">
         <div class="img-slot way-card-img aspect-4-3" data-fallback="[ STEP 01 ・ 焙煎豆ボトル ]">
           <img src="images/way-01.jpg" alt="フレッシュな豆を、買う" loading="lazy" />
         </div>
@@ -1538,7 +1690,7 @@
         </div>
       </article>
 
-      <article class="way-card reveal">
+      <article class="way-card reveal parallax-card">
         <div class="img-slot way-card-img aspect-4-3" data-fallback="[ STEP 02 ・ ハンドドリップ ]">
           <img src="images/way-02.jpg" alt="自分の手で、淹れる" loading="lazy" />
         </div>
@@ -1550,7 +1702,7 @@
         </div>
       </article>
 
-      <article class="way-card reveal">
+      <article class="way-card reveal parallax-card">
         <div class="img-slot way-card-img aspect-4-3" data-fallback="[ STEP 03 ・ 焙煎風景 ]">
           <img src="images/way-03.jpg" alt="自分の豆を、焙煎する" loading="lazy" />
         </div>
@@ -1569,7 +1721,13 @@
 <!-- =========================================================
      FRESHNESS
      ========================================================= -->
-<section id="freshness" class="section section-cream">
+<section id="freshness" class="section section-cream parallax-decor parallax-decor--paper">
+  <div class="parallax-shape parallax-shape--fresh-1" data-parallax-speed="0.25" aria-hidden="true">
+    <svg viewBox="0 0 50 130" xmlns="http://www.w3.org/2000/svg"><path d="M25 120 Q12 95 25 75 Q38 55 25 35 Q12 15 25 0" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/></svg>
+  </div>
+  <div class="parallax-shape parallax-shape--fresh-2" data-parallax-speed="-0.18" aria-hidden="true">
+    <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="55" rx="33" ry="50"/><path d="M40 8 C48 35 48 75 40 102" stroke="rgba(255,249,242,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
   <div class="container">
     <div class="freshness-grid">
       <div class="reveal">
@@ -1619,7 +1777,13 @@
 <!-- =========================================================
      PRODUCTS
      ========================================================= -->
-<section id="products" class="section">
+<section id="products" class="section parallax-decor parallax-decor--bean">
+  <div class="parallax-shape parallax-shape--prod-1" data-parallax-speed="0.20" aria-hidden="true">
+    <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="55" rx="33" ry="50"/><path d="M40 8 C48 35 48 75 40 102" stroke="rgba(255,249,242,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
+  <div class="parallax-shape parallax-shape--prod-2" data-parallax-speed="-0.28" aria-hidden="true">
+    <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="55" rx="33" ry="50"/><path d="M40 8 C48 35 48 75 40 102" stroke="rgba(255,249,242,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
   <div class="container">
     <div class="section-head center reveal">
       <span class="section-label">Products</span>
@@ -1677,7 +1841,7 @@
 <!-- =========================================================
      VOICES
      ========================================================= -->
-<section id="voices" class="section section-cream">
+<section id="voices" class="section section-cream parallax-decor parallax-decor--warm">
   <div class="container">
     <div class="section-head center reveal">
       <span class="section-label">Voices</span>
@@ -1761,7 +1925,13 @@
 <!-- =========================================================
      WORKSHOPS
      ========================================================= -->
-<section id="workshop" class="section section-cream">
+<section id="workshop" class="section section-cream parallax-decor parallax-decor--warm">
+  <div class="parallax-shape parallax-shape--workshop-1" data-parallax-speed="0.22" aria-hidden="true">
+    <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="55" rx="33" ry="50"/><path d="M40 8 C48 35 48 75 40 102" stroke="rgba(255,249,242,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
+  <div class="parallax-shape parallax-shape--workshop-2" data-parallax-speed="-0.18" aria-hidden="true">
+    <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="55" rx="33" ry="50"/><path d="M40 8 C48 35 48 75 40 102" stroke="rgba(255,249,242,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
   <div class="container">
     <div class="section-head center reveal">
       <span class="section-label">Workshop</span>
@@ -1771,7 +1941,7 @@
 
     <div class="workshop-grid">
 
-      <article class="workshop-card reveal" data-workshop="drip">
+      <article class="workshop-card reveal parallax-card" data-workshop="drip">
         <div class="img-slot workshop-card-img aspect-16-10" data-fallback="[ DRIP WORKSHOP ]">
           <img src="images/workshop-drip.jpg" alt="ハンドドリップワークショップ" loading="lazy" />
         </div>
@@ -1814,7 +1984,7 @@
         </div>
       </article>
 
-      <article class="workshop-card reveal" data-workshop="roast">
+      <article class="workshop-card reveal parallax-card" data-workshop="roast">
         <div class="img-slot workshop-card-img aspect-16-10" data-fallback="[ ROAST WORKSHOP ]">
           <img src="images/workshop-roast.jpg" alt="珈琲焙煎ワークショップ" loading="lazy" />
         </div>
@@ -1864,7 +2034,13 @@
 <!-- =========================================================
      STORES
      ========================================================= -->
-<section id="stores" class="section">
+<section id="stores" class="section parallax-decor parallax-decor--paper">
+  <div class="parallax-shape parallax-shape--stores-1" data-parallax-speed="0.25" aria-hidden="true">
+    <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="55" rx="33" ry="50"/><path d="M40 8 C48 35 48 75 40 102" stroke="rgba(255,249,242,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
+  <div class="parallax-shape parallax-shape--stores-2" data-parallax-speed="-0.20" aria-hidden="true">
+    <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="55" rx="33" ry="50"/><path d="M40 8 C48 35 48 75 40 102" stroke="rgba(255,249,242,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
   <div class="container">
     <div class="section-head center reveal">
       <span class="section-label">Stores</span>
@@ -1873,7 +2049,7 @@
     </div>
     <div class="stores-grid">
 
-      <article class="store-card reveal">
+      <article class="store-card reveal parallax-card">
         <div class="img-slot store-card-img aspect-4-3" data-fallback="[ STORE ・ 宮古島本店 ]">
           <img src="images/store-miyakojima.jpg" alt="HASABA COFFEE 宮古島本店" loading="lazy" />
         </div>
@@ -1892,7 +2068,7 @@
         </div>
       </article>
 
-      <article class="store-card reveal">
+      <article class="store-card reveal parallax-card">
         <div class="img-slot store-card-img aspect-4-3" data-fallback="[ STORE ・ 新所沢店 ]">
           <img src="images/store-shintoko.jpg" alt="HASABA COFFEE 新所沢店" loading="lazy" />
         </div>
@@ -1911,7 +2087,7 @@
         </div>
       </article>
 
-      <article class="store-card reveal">
+      <article class="store-card reveal parallax-card">
         <div class="img-slot store-card-img aspect-4-3" data-fallback="[ STORE ・ 伊良部島店 ]">
           <img src="images/store-irabu.jpg" alt="HASABA COFFEE 伊良部島店" loading="lazy" />
         </div>
@@ -1937,7 +2113,10 @@
 <!-- =========================================================
      ABOUT
      ========================================================= -->
-<section id="story" class="section section-cream">
+<section id="story" class="section section-cream parallax-decor parallax-decor--warm">
+  <div class="parallax-shape parallax-shape--story-1" data-parallax-speed="0.30" aria-hidden="true">
+    <svg viewBox="0 0 80 110" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="55" rx="33" ry="50"/><path d="M40 8 C48 35 48 75 40 102" stroke="rgba(255,249,242,0.55)" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+  </div>
   <div class="container">
     <div class="about">
       <div class="reveal">
@@ -2702,6 +2881,95 @@
       }
     });
   }
+
+  // =========================================================
+  // Parallax: 軽量・GPU最適化・モーション設定に従う
+  // =========================================================
+  (function initParallax() {
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return; // 設定で動きOFFなら一切起動しない
+
+    const isMobile = matchMedia('(max-width: 720px)').matches;
+
+    // --- Layer A: Hero background parallax ---
+    const heroBg = document.querySelector('.hero .parallax-bg');
+    const heroSection = heroBg ? heroBg.closest('.hero') : null;
+    if (heroBg && heroSection) {
+      const factor = isMobile ? 0.15 : 0.35;
+      let ticking = false;
+      let heroVisible = true;
+      const updateHero = () => {
+        const rect = heroSection.getBoundingClientRect();
+        // 可視範囲外なら計算スキップ
+        if (rect.bottom <= 0 || rect.top >= window.innerHeight) {
+          if (heroVisible) {
+            heroBg.style.willChange = 'auto';
+            heroVisible = false;
+          }
+          ticking = false;
+          return;
+        }
+        if (!heroVisible) {
+          heroBg.style.willChange = 'transform';
+          heroVisible = true;
+        }
+        heroBg.style.setProperty('--scroll-offset', `${rect.top * -factor}px`);
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(updateHero); ticking = true; }
+      }, { passive: true });
+      updateHero();
+    }
+
+    // --- Layer B + C: 装飾レイヤー & カードlift をビューポート進入時に発火 ---
+    const parallaxObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in-view');
+          parallaxObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.parallax-decor, .parallax-card')
+      .forEach(el => parallaxObserver.observe(el));
+
+    // --- Layer D: 可視 SVG shapes をスクロールに合わせて動かす ---
+    const shapes = Array.from(document.querySelectorAll('.parallax-shape'));
+    if (shapes.length) {
+      // 各shape の親セクションをキャッシュ
+      const shapeData = shapes.map(shape => ({
+        el: shape,
+        parent: shape.parentElement,
+        speed: parseFloat(shape.dataset.parallaxSpeed) || 0.2
+      }));
+      let shapeTicking = false;
+      const shapeMobileFactor = isMobile ? 0.6 : 1; // mobileは控えめに
+      function updateShapes() {
+        const vh = window.innerHeight;
+        shapeData.forEach(({ el, parent, speed }) => {
+          if (!parent) return;
+          const rect = parent.getBoundingClientRect();
+          // 可視範囲外スキップ
+          if (rect.bottom < -200 || rect.top > vh + 200) return;
+          // 親セクション中央が viewport 中央から離れた距離 × speed
+          const sectionCenter = rect.top + rect.height / 2;
+          const viewportCenter = vh / 2;
+          const offset = (viewportCenter - sectionCenter) * speed * shapeMobileFactor;
+          el.style.setProperty('--parallax-y', `${offset}px`);
+        });
+        shapeTicking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!shapeTicking) { requestAnimationFrame(updateShapes); shapeTicking = true; }
+      }, { passive: true });
+      window.addEventListener('resize', () => {
+        if (!shapeTicking) { requestAnimationFrame(updateShapes); shapeTicking = true; }
+      });
+      updateShapes();
+    }
+  })();
 </script>
 
 </body>
