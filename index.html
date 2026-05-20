@@ -1066,6 +1066,42 @@
   @media (min-width: 720px) { .stores-grid { grid-template-columns: repeat(3, 1fr); } }
 
   /* =========================================================
+     STORES — Mobile only: 横スライド カルーセル (max-width: 768px)
+     スコープ: #stores 内のみ。PC（769px+）には影響しない
+     ========================================================= */
+  @media (max-width: 768px) {
+    #stores .stores-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 12px;
+      padding: 4px 16px 12px;
+      margin-inline: -24px;            /* container の左右パディングを相殺してエッジまで広げる */
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 16px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;            /* Firefox: スクロールバー非表示 */
+      -ms-overflow-style: none;         /* IE / Edge */
+    }
+    #stores .stores-grid::-webkit-scrollbar { display: none; }  /* Webkit */
+
+    #stores .stores-grid > .store-card {
+      flex: 0 0 auto;
+      min-width: 86vw;
+      max-width: 420px;
+      scroll-snap-align: start;
+    }
+
+    /* 既存 .parallax-card のフェード演出は横スライダーと相性が悪いため、本セクションのみ即時表示にオーバーライド */
+    #stores .stores-grid > .store-card.parallax-card {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* =========================================================
      About
      ========================================================= */
   .about { display: grid; grid-template-columns: 1fr; gap: 36px; align-items: center; }
@@ -1806,7 +1842,7 @@
         <p>浅煎り・中煎り・深煎りを少量ずつ。違いを体感して、自分の好みを見つける、いちばん失敗しない始め方です。</p>
         <div class="starter-features">
           <span>各100g×3本</span>
-          <span>送料込み</span>
+          <span>お試し価格</span>
           <span>初回限定</span>
         </div>
         <div class="cta-stack" style="align-items:flex-start;">
@@ -1915,11 +1951,10 @@
         <div class="subscription-features">
           <span>2ヶ月毎/毎月</span>
           <span>3種セット</span>
-          <span>送料込み</span>
           <span>マイページから停止</span>
         </div>
         <div class="cta-stack" style="align-items:flex-start;">
-          <a href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-mellow">定期便を申し込む</a>
+          <a href="https://hasabacoffee.theshop.jp/categories/7331946" target="_blank" rel="noopener" class="btn btn-mellow">定期便を申し込む</a>
           <span class="cta-microcopy light">¥1,950/回〜・既登録者は割引価格あり</span>
         </div>
       </div>
@@ -2429,7 +2464,7 @@
   // =========================================================
   const PRODUCTS = [
     // 焙煎豆 (roasted) — 8 items
-    { category: 'roasted', name: 'お試し3種飲み比べセット', origin: '浅・中・深 / ミニボトル×3本', desc: '焙煎度の違いを一度に体感できる、お得な初心者向けセット。', label: 'Set', price: '¥3,600', image: 'images/product-08.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073495' },
+    { category: 'roasted', name: 'お試し3種飲み比べセット', origin: '浅・中・深 / ミニボトル×3本', desc: '焙煎度の違いを一度に体感できる、お得な初心者向けセット。', label: 'Set', price: '¥3,000', image: 'images/product-08.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073495' },
     { category: 'roasted', name: 'パプアニューギニア コルブラン モリタ区画', origin: 'Floral · Fruity / 190g', desc: '華やかな香りとフルーティーな酸味。朝の一杯に。', label: 'Light', price: '¥1,986', image: 'images/product-01.jpg', url: 'https://hasabacoffee.theshop.jp/items/134084642' },
     { category: 'roasted', name: 'タンザニア コンゴニ', origin: 'Bright · Clean / 160g', desc: '軽やかでスッキリ、キリマンジャロの爽やかさ。', label: 'Medium', price: '¥1,810', image: 'images/product-02.jpg', url: 'https://hasabacoffee.theshop.jp/items/128860234' },
     { category: 'roasted', name: 'インドネシア マンデリン', origin: 'Deep · Rich / 135g', desc: '深いコクと香ばしさ。アイスコーヒーにも。', label: 'Dark', price: '¥1,639', image: 'images/product-03.jpg', url: 'https://hasabacoffee.theshop.jp/items/128859947' },
@@ -2455,7 +2490,7 @@
 
     // ギフト (gift) — 4 items
     { category: 'gift', name: '旬の豆ギフトボックス', origin: '季節の3種セット / ギフトラッピング', desc: '旬の豆を厳選してお届けする、コーヒー好きへの特別なギフト。', label: 'Box', price: '¥6,000', image: 'images/product-37.jpg', url: 'https://hasabacoffee.theshop.jp/items/143492554' },
-    { category: 'gift', name: '3種飲み比べ ミニボトルセット', origin: '浅・中・深 / ミニボトル×3本', desc: '焙煎度の違いを楽しむ、カジュアルなギフトに最適。', label: 'Set', price: '¥3,600', image: 'images/product-08.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073495' },
+    { category: 'gift', name: '3種飲み比べ ミニボトルセット', origin: '浅・中・深 / ミニボトル×3本', desc: '焙煎度の違いを楽しむ、カジュアルなギフトに最適。', label: 'Set', price: '¥3,000', image: 'images/product-08.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073495' },
     { category: 'gift', name: 'ドリップバッグセット 3個入', origin: '浅・中・深 / ドリップバッグ×3', desc: 'お湯を注ぐだけで本格コーヒー。ちょっとしたお礼に。', label: 'Drip', price: '¥1,200', image: 'images/product-38.jpg', url: 'https://hasabacoffee.theshop.jp/items/144074726' },
     { category: 'gift', name: 'ドリップバッグセット 6個入', origin: '6種アソート / ドリップバッグ×6', desc: 'バリエーション豊かなドリップバッグ。長く楽しめる贈り物。', label: 'Drip', price: '¥2,400', image: 'images/product-39.jpg', url: 'https://hasabacoffee.theshop.jp/items/144075973' },
 
