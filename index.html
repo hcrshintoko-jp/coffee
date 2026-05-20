@@ -366,18 +366,33 @@
   }
   .header-nav a:hover { color: var(--color-roast-red); }
   .header-cta { display: none; font-size: 12px; padding: 10px 18px; min-width: auto; }
-  .menu-toggle { width: 28px; height: 22px; position: relative; z-index: 110; }
+  .menu-toggle {
+    width: 44px; height: 44px;        /* タップ領域 44x44 (Apple HIG / WCAG準拠) */
+    position: relative;
+    z-index: 110;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(82, 44, 37, 0.1);
+    touch-action: manipulation;        /* iOS の 300ms tap delay 除去 */
+    display: inline-block;             /* button defaultでも念のため明示 */
+  }
   .menu-toggle span {
-    display: block; position: absolute; left: 0; right: 0; height: 2px;
+    display: block;
+    position: absolute;
+    left: 10px; right: 10px;          /* 内側 24px の hamburger を中央に */
+    height: 2px;
     background: var(--color-vinyl-brown);
     transition: transform .3s ease, opacity .3s ease, top .3s ease;
+    pointer-events: none;             /* spanへのクリックを button に必ず伝える */
   }
-  .menu-toggle span:nth-child(1) { top: 2px; }
-  .menu-toggle span:nth-child(2) { top: 10px; }
-  .menu-toggle span:nth-child(3) { top: 18px; }
-  body.menu-open .menu-toggle span:nth-child(1) { top: 10px; transform: rotate(45deg); }
+  .menu-toggle span:nth-child(1) { top: 14px; }
+  .menu-toggle span:nth-child(2) { top: 21px; }
+  .menu-toggle span:nth-child(3) { top: 28px; }
+  body.menu-open .menu-toggle span:nth-child(1) { top: 21px; transform: rotate(45deg); }
   body.menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
-  body.menu-open .menu-toggle span:nth-child(3) { top: 10px; transform: rotate(-45deg); }
+  body.menu-open .menu-toggle span:nth-child(3) { top: 21px; transform: rotate(-45deg); }
   .mobile-nav {
     position: fixed; inset: 0; background: var(--color-cream-canvas);
     z-index: 105; transform: translateX(100%); transition: transform .35s ease;
