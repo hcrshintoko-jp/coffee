@@ -1792,7 +1792,11 @@
       <span></span><span></span><span></span>
     </button>
   </div>
-  <nav class="mobile-nav" aria-label="モバイルナビゲーション">
+</header>
+
+<!-- mobile-nav は header の外に配置（header の backdrop-filter が
+     position:fixed の包含ブロックを作るため、内側だと閉じ込められる） -->
+<nav class="mobile-nav" aria-label="モバイルナビゲーション">
     <button type="button" class="mobile-nav-close" aria-label="メニューを閉じる">
       <span aria-hidden="true">×</span>
     </button>
@@ -1836,7 +1840,6 @@
       </div>
     </div>
   </nav>
-</header>
 
 <!-- =========================================================
      HERO
