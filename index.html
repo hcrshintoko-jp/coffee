@@ -1135,6 +1135,28 @@
   @media (min-width: 720px) { .stores-grid { grid-template-columns: repeat(3, 1fr); } }
 
   /* =========================================================
+     Retail Partners map (レスポンシブ iframe)
+     ========================================================= */
+  .retail-map {
+    max-width: 860px;
+    margin: 0 auto;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    border: 1px solid var(--color-smoky-ash);
+    background: var(--color-cream-canvas);
+    box-shadow: 0 6px 24px rgba(82, 44, 37, 0.06);
+  }
+  .retail-map iframe {
+    display: block;
+    width: 100%;
+    height: 480px;
+    border: 0;
+  }
+  @media (max-width: 768px) {
+    .retail-map iframe { height: 68vw; min-height: 320px; max-height: 460px; }
+  }
+
+  /* =========================================================
      STORES — Mobile only: 横スライド カルーセル (max-width: 768px)
      スコープ: #stores 内のみ。PC（769px+）には影響しない
      ========================================================= */
@@ -1837,6 +1859,7 @@
         <ul>
           <li><a href="#workshop">ワークショップ</a></li>
           <li><a href="#stores">店舗一覧</a></li>
+          <li><a href="#retail">お取り扱い店</a></li>
         </ul>
       </div>
       <div class="mobile-nav-section">
@@ -2364,6 +2387,27 @@
         </div>
       </article>
 
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     RETAIL PARTNERS / お取り扱い店
+     ========================================================= -->
+<section id="retail" class="section section-cream parallax-decor parallax-decor--paper">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="section-label">Retail Partners</span>
+      <h2 class="section-title">HASABA COFFEE お取り扱い店</h2>
+      <p class="section-lead">直営店のほか、全国のお取り扱い店でも<br />HASABA COFFEE の豆をお楽しみいただけます。</p>
+    </div>
+    <div class="retail-map reveal">
+      <iframe
+        src="https://www.google.com/maps/d/embed?mid=1Cj24GovOc_RiTpsyyCoR0GgIFcOReLk&ehbc=2E312F"
+        title="HASABA COFFEE お取り扱い店マップ"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 </section>
