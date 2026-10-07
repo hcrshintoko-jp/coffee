@@ -86,8 +86,7 @@
   "image": "https://hasabacoffee.com/images/ogp.jpg",
   "description": "沖縄・宮古島の焙煎所。「珈琲は、生鮮飲料」をコンセプトに、ニュークロップのみを焙煎し全国へお届けしています。",
   "sameAs": [
-    "https://hasabacoffee.theshop.jp/",
-    "https://shintoko.hasabacoffee.com/"
+    "https://hasabacoffee.theshop.jp/"
   ]
 }
 </script>
@@ -115,7 +114,7 @@
   "@type": "CafeOrCoffeeShop",
   "name": "HASABA COFFEE 新所沢店",
   "image": "https://hasabacoffee.com/images/store-shintoko.jpg",
-  "url": "https://shintoko.hasabacoffee.com/",
+  "url": "https://hasabacoffee.com/#shintoko-guide",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "松葉町16-14",
@@ -124,12 +123,25 @@
     "postalCode": "359-0044",
     "addressCountry": "JP"
   },
+  "specialOpeningHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "validFrom": "2026-10-12",
+    "validThrough": "2026-10-12",
+    "opens": "00:00",
+    "closes": "00:00"
+  }],
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "dayOfWeek": ["Monday","Tuesday","Wednesday"],
       "opens": "07:00",
       "closes": "17:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Thursday","Friday"],
+      "opens": "07:00",
+      "closes": "20:00"
     },
     {
       "@type": "OpeningHoursSpecification",
@@ -172,7 +184,7 @@
     {
       "@type": "Question",
       "name": "定期便は途中で解約できますか？",
-      "acceptedAnswer": { "@type": "Answer", "text": "いつでも解約・一時停止が可能です。マイページから手続きできますので、お試し感覚でお気軽にお始めいただけます。" }
+      "acceptedAnswer": { "@type": "Answer", "text": "変更・解約についてはショップへご相談ください。お申し込み前に、商品ページに記載された継続条件をご確認ください。" }
     },
     {
       "@type": "Question",
@@ -1796,6 +1808,49 @@
       max-width: 100vw;
     }
   }
+
+  /* Shintoko access and shopping entry points. */
+  #shintoko-guide { scroll-margin-top: 80px; }
+  .shintoko-guide { padding: 48px 0; background: var(--color-warm-beige); border-bottom: 1px solid var(--color-smoky-ash); }
+  .shintoko-guide h2 { font-family: var(--font-display); font-size: clamp(24px, 4vw, 34px); line-height: 1.4; margin: 8px 0 14px; }
+  .shintoko-guide .shintoko-lead { font-size: 14px; line-height: 1.9; margin-bottom: 22px; }
+  .shintoko-actions { display: grid; gap: 12px; margin-bottom: 14px; }
+  .shintoko-actions .btn { min-width: 0; width: 100%; min-height: 56px; padding: 16px 12px; }
+  .shintoko-workshop { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; font-size: 14px; font-weight: 700; }
+  .shintoko-stock-note { margin: 6px 0 26px; font-size: 12px; line-height: 1.8; color: var(--color-vinyl-brown); }
+  .shintoko-access { display: grid; gap: 24px; border-top: 1px solid var(--color-smoky-ash); padding-top: 24px; }
+  .shintoko-access h3 { font-size: 20px; margin: 0 0 10px; }
+  .shintoko-address { font-size: 14px; line-height: 1.9; margin-bottom: 16px; }
+  .shintoko-hours { font-size: 13px; line-height: 1.9; margin-bottom: 16px; }
+  .shintoko-hours div { display: grid; grid-template-columns: 90px 1fr; gap: 8px; }
+  .shintoko-hours dt { font-weight: 700; }
+  .shintoko-hours dd { margin: 0; }
+  .shintoko-closed { padding: 12px 14px; border-left: 3px solid var(--color-roast-red); background: var(--color-cream-canvas); font-size: 14px; font-weight: 700; line-height: 1.8; }
+  .shintoko-instagram { display: inline-block; margin-top: 10px; min-height: 44px; padding-top: 9px; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; }
+  .shintoko-map { width: 100%; height: 250px; border: 0; border-radius: 3px; background: var(--color-smoky-ash); }
+  .product-availability { font-size: 11px; line-height: 1.6; max-width: 150px; }
+  @media (min-width: 720px) {
+    .shintoko-guide { padding: 56px 0; }
+    .shintoko-actions { grid-template-columns: 1fr 1fr; max-width: 720px; }
+    .shintoko-access { grid-template-columns: 1fr 1fr; }
+    .shintoko-map { height: 310px; }
+  }
+
+
+  /* BASE official product widgets load live prices directly from the shop. */
+  .base-widget-note { font-size: 12px; line-height: 1.8; margin: 0 0 22px; color: var(--color-vinyl-brown); }
+  .base-product-widget { display: block; width: 100%; height: 220px; border: 0; background: white; }
+  .product-card-live .product-card-body { padding-top: 12px; }
+  .product-card-live .product-name { margin: 0 0 8px; }
+  .product-card-live .product-card-footer { flex-wrap: wrap; }
+  .base-widget-fallback { display:block; width:100%; font-size:11px; line-height:1.7; color:var(--color-vinyl-brown); }
+  .product-card-live .btn-text, .product-card-store .btn-text { min-height:44px; display:inline-flex; align-items:center; }
+  @media (max-width: 719px) {
+    .product-slider .product-card { flex-basis: min(280px, 85vw); }
+    .hero-ctas { gap: 10px; }
+    .hero-ctas .btn { padding-top: 13px; padding-bottom: 13px; }
+  }
+
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -1849,7 +1904,7 @@
         <h5 class="mobile-nav-heading">Products / 商品</h5>
         <ul>
           <li><a href="#products">商品ラインナップ</a></li>
-          <li><a href="#starter">初めての方におすすめ</a></li>
+          <li><a href="#starter">3種飲み比べセット</a></li>
           <li><a href="#subscription">定期便</a></li>
           <li><a href="#gift">ギフト</a></li>
         </ul>
@@ -1903,12 +1958,43 @@
     </p>
     <p class="hero-subtitle">沖縄・宮古島発、ニュークロップだけを焙煎後すぐに全国へ。<br />フレッシュな香りをそのままご自宅へお届けします。</p>
     <div class="hero-ctas">
-      <a href="#products" class="btn btn-primary">コーヒー豆を購入する</a>
-      <a href="#workshop" class="btn btn-ghost-light">ワークショップを予約する</a>
+      <a href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary">コーヒー豆を通販で買う</a>
+      <a href="https://www.google.com/maps/place/HASABA+COFFEE+%E6%96%B0%E6%89%80%E6%B2%A2%E5%BA%97/@35.807828,139.4573459,17z/data=!3m1!5s0x6018ddc548f602e7:0x3e7e6f789235bbb6!4m15!1m8!3m7!1s0x6018ddc54861b555:0x8bf08e8c848a8506!2z44CSMzU5LTAwNDQg5Z-8546J55yM5omA5rKi5biC5p2-6JGJ55S677yR77yW4oiS77yR77yU!3b1!8m2!3d35.807828!4d139.4573459!16s%2Fg%2F12hk9c22k!3m5!1s0x6018dd5656f66507:0x386c0ee9c1a4a0dc!8m2!3d35.8077914!4d139.4573781!16s%2Fg%2F11yj_97h43" target="_blank" rel="noopener" class="btn btn-ghost-light">新所沢店の地図・行き方</a>
+          <a href="#workshop" class="btn btn-ghost-light">ワークショップを予約する</a>
     </div>
     <p class="hero-microcopy">定期便あり・全国発送OK</p>
   </div>
   <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- Store access and online shopping -->
+<section id="shintoko-guide" class="shintoko-guide" aria-labelledby="shintoko-guide-title">
+  <div class="container">
+    <span class="section-label">Shintokorozawa</span>
+    <h2 id="shintoko-guide-title">新所沢店をお探しの方へ</h2>
+    <p class="shintoko-lead">ご自宅で楽しむコーヒーはオンラインショップへ。<br />お店へお越しの方は、こちらからアクセスをご確認ください。</p>
+    <div class="shintoko-actions">
+      <a class="btn btn-primary" href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener">コーヒー豆を通販で買う</a>
+      <a class="btn btn-mellow" href="https://www.google.com/maps/place/HASABA+COFFEE+%E6%96%B0%E6%89%80%E6%B2%A2%E5%BA%97/@35.807828,139.4573459,17z/data=!3m1!5s0x6018ddc548f602e7:0x3e7e6f789235bbb6!4m15!1m8!3m7!1s0x6018ddc54861b555:0x8bf08e8c848a8506!2z44CSMzU5LTAwNDQg5Z-8546J55yM5omA5rKi5biC5p2-6JGJ55S677yR77yW4oiS77yR77yU!3b1!8m2!3d35.807828!4d139.4573459!16s%2Fg%2F12hk9c22k!3m5!1s0x6018dd5656f66507:0x386c0ee9c1a4a0dc!8m2!3d35.8077914!4d139.4573781!16s%2Fg%2F11yj_97h43" target="_blank" rel="noopener">新所沢店の地図・行き方</a>
+    </div>
+    <a class="shintoko-workshop" href="https://lp.hasabacoffee.com/lp/roast-b/" target="_blank" rel="noopener">新所沢店の珈琲焙煎ワークショップを予約する →</a>
+    <p class="shintoko-stock-note">通販の価格・在庫・送料・発送目安は、BASEの商品ページでご確認ください。</p>
+    <div class="shintoko-access">
+      <div>
+        <h3>新所沢駅 東口から徒歩1分</h3>
+        <p class="shintoko-address">HASABA COFFEE 新所沢店<br />〒359-0044 埼玉県所沢市松葉町16-14</p>
+        <dl class="shintoko-hours">
+          <div><dt>月・火・水</dt><dd>7:00–17:00</dd></div>
+          <div><dt>木・金</dt><dd>7:00–20:00</dd></div>
+          <div><dt>土・日</dt><dd>10:00–16:00</dd></div>
+          <div><dt>定休日</dt><dd>祝日</dd></div>
+        </dl>
+        <p class="shintoko-closed">10月12日（月・祝）は休業いたします。</p>
+        <a class="shintoko-instagram" href="https://www.instagram.com/hasabacoffee_shintoko/" target="_blank" rel="noopener">新所沢店のお知らせをInstagramで見る →</a>
+      </div>
+      <iframe class="shintoko-map" src="https://www.google.com/maps?q=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%89%80%E6%B2%A2%E5%B8%82%E6%9D%BE%E8%91%89%E7%94%BA16-14&amp;output=embed" title="新所沢店のアクセス地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
 </section>
 
 <!-- =========================================================
@@ -2078,17 +2164,17 @@
         <img src="images/starter.jpg" alt="3種お試しセット" loading="lazy" />
       </div>
       <div class="starter-content">
-        <span class="starter-tag">FOR FIRST TIME</span>
-        <h3>迷ったら、3種お試しセットから。</h3>
-        <p>浅煎り・中煎り・深煎りを少量ずつ。違いを体感して、自分の好みを見つける、いちばん失敗しない始め方です。</p>
+        <span class="starter-tag">TASTING SET</span>
+        <h3>3種飲み比べセット</h3>
+        <p>浅煎り・中煎り・深煎りの違いを楽しむセットです。販売状況は商品ページでご確認ください。</p>
         <div class="starter-features">
-          <span>各100g×3本</span>
-          <span>お試し価格</span>
-          <span>初回限定</span>
+          <span>浅煎り</span>
+          <span>中煎り</span>
+          <span>深煎り</span>
         </div>
         <div class="cta-stack" style="align-items:flex-start;">
-          <a href="https://hasabacoffee.theshop.jp/items/144073495" target="_blank" rel="noopener" class="btn btn-primary">お試しセットを見る</a>
-          <span class="cta-microcopy light">在庫あり・通常2-4日でお届け</span>
+          <a href="https://hasabacoffee.theshop.jp/items/144073495" target="_blank" rel="noopener" class="btn btn-primary">商品詳細・販売状況を見る</a>
+          <span class="cta-microcopy light">価格・在庫・送料・発送目安はBASEの商品ページでご確認ください。</span>
         </div>
       </div>
     </div>
@@ -2101,6 +2187,7 @@
       <button class="product-tab" data-category="goods" role="tab" aria-selected="false">焙煎器・グッズ</button>
     </div>
 
+    <p class="base-widget-note">商品画像・価格はBASEから読み込んで表示しています。在庫・送料・発送目安は、各商品の「BASEで確認」からご確認ください。</p>
     <div class="product-slider-wrap reveal">
       <div class="product-slider-controls">
         <button class="slider-btn slider-prev" type="button" aria-label="前の商品へ"><span aria-hidden="true">←</span></button>
@@ -2114,7 +2201,7 @@
     <div class="products-cta reveal">
       <div class="cta-stack">
         <a href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary btn-arrow">すべての商品を見る</a>
-        <span class="cta-microcopy">¥978〜・全国発送・特定商取引法に基づく表記あり</span>
+        <span class="cta-microcopy">価格・在庫・送料はBASEの商品ページでご確認ください。</span>
       </div>
     </div>
   </div>
@@ -2187,16 +2274,16 @@
       <div class="subscription-content">
         <span class="subscription-label">Subscription</span>
         <h2>毎月、新鮮な豆が届く<br />暮らしを。</h2>
-        <p class="subscription-assurance">途中解約・休止、いつでもOK</p>
+        <p class="subscription-assurance">変更・解約はショップへご相談ください</p>
         <p>3種類の異なる産地・焙煎度の豆をセットでお届け。あなたの「お気に入りの一本」を、ゆっくり見つけてください。</p>
         <div class="subscription-features">
           <span>2ヶ月毎/毎月</span>
           <span>3種セット</span>
-          <span>マイページから停止</span>
+          <span>変更・解約はショップへ相談</span>
         </div>
         <div class="cta-stack" style="align-items:flex-start;">
           <a href="https://hasabacoffee.theshop.jp/categories/7331946" target="_blank" rel="noopener" class="btn btn-mellow">定期便を申し込む</a>
-          <span class="cta-microcopy light">¥1,950/回〜・既登録者は割引価格あり</span>
+          <span class="cta-microcopy light">料金・お届け内容・ご利用条件はBASEでご確認ください。</span>
         </div>
       </div>
     </div>
@@ -2359,9 +2446,9 @@
           <p class="area">Saitama / Tokorozawa</p>
           <dl class="store-info">
             <div><dt>Address</dt><dd>〒359-0044<br />埼玉県所沢市松葉町16-14</dd></div>
-            <div><dt>Access</dt><dd>西武新宿線 新所沢駅より徒歩1分</dd></div>
-            <div><dt>Open</dt><dd>平日 7:00 – 17:00<br />土日 10:00 – 16:00</dd></div>
-            <div><dt>定休日</dt><dd>祝日</dd></div>
+            <div><dt>Access</dt><dd>西武新宿線 新所沢駅 東口より徒歩1分</dd></div>
+            <div><dt>Open</dt><dd>月・火・水 7:00 – 17:00<br />木・金 7:00 – 20:00<br />土・日 10:00 – 16:00</dd></div>
+            <div><dt>定休日</dt><dd>祝日<br />10月12日（月・祝）は休業</dd></div>
              <div><dt>Workshop</dt><dd>焙煎：土・日/ハンドドリップ：月・火・水</dd></div>
           </dl>
           <a href="https://www.google.com/maps/place/HASABA+COFFEE+%E6%96%B0%E6%89%80%E6%B2%A2%E5%BA%97/@35.807828,139.4573459,17z/data=!3m1!5s0x6018ddc548f602e7:0x3e7e6f789235bbb6!4m15!1m8!3m7!1s0x6018ddc54861b555:0x8bf08e8c848a8506!2z44CSMzU5LTAwNDQg5Z-8546J55yM5omA5rKi5biC5p2-6JGJ55S677yR77yW4oiS77yR77yU!3b1!8m2!3d35.807828!4d139.4573459!16s%2Fg%2F12hk9c22k!3m5!1s0x6018dd5656f66507:0x386c0ee9c1a4a0dc!8m2!3d35.8077914!4d139.4573781!16s%2Fg%2F11yj_97h43" target="_blank" rel="noopener" class="btn btn-ghost btn-arrow">Google Map で開く</a>
@@ -2570,7 +2657,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q">定期便は途中で解約できますか？</button>
-        <div class="faq-a"><div class="faq-a-inner">いつでも解約・一時停止が可能です。マイページから手続きできますので、お試し感覚でお気軽にお始めいただけます。</div></div>
+        <div class="faq-a"><div class="faq-a-inner">変更・解約についてはショップへご相談ください。お申し込み前に、商品ページに記載された継続条件をご確認ください。</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">ペットボトルの返却サービスはありますか？</button>
@@ -2700,9 +2787,9 @@
     豆を購入する
     <small>全国発送・定期便あり</small>
   </a>
-  <a href="https://lin.ee/oGAqwMo" target="_blank" rel="noopener" class="sticky-mellow">
-    LINEで予約
-    <small>24時間OK</small>
+  <a href="https://www.google.com/maps/place/HASABA+COFFEE+%E6%96%B0%E6%89%80%E6%B2%A2%E5%BA%97/@35.807828,139.4573459,17z/data=!3m1!5s0x6018ddc548f602e7:0x3e7e6f789235bbb6!4m15!1m8!3m7!1s0x6018ddc54861b555:0x8bf08e8c848a8506!2z44CSMzU5LTAwNDQg5Z-8546J55yM5omA5rKi5biC5p2-6JGJ55S677yR77yW4oiS77yR77yU!3b1!8m2!3d35.807828!4d139.4573459!16s%2Fg%2F12hk9c22k!3m5!1s0x6018dd5656f66507:0x386c0ee9c1a4a0dc!8m2!3d35.8077914!4d139.4573781!16s%2Fg%2F11yj_97h43" target="_blank" rel="noopener" class="sticky-mellow">
+    新所沢店へ行く
+    <small>東口徒歩1分</small>
   </a>
 </div>
 
@@ -2735,48 +2822,48 @@
   // =========================================================
   const PRODUCTS = [
     // 焙煎豆 (roasted) — 8 items
-    { category: 'roasted', name: 'お試し3種飲み比べセット', origin: '浅・中・深 / ミニボトル×3本', desc: '焙煎度の違いを一度に体感できる、お得な初心者向けセット。', label: 'Set', price: '¥3,000', image: 'images/product-08.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073495' },
-    { category: 'roasted', name: 'パプアニューギニア コルブラン モリタ区画', origin: 'Floral · Fruity / 190g', desc: '華やかな香りとフルーティーな酸味。朝の一杯に。', label: 'Light', price: '¥1,986', image: 'images/product-01.jpg', url: 'https://hasabacoffee.theshop.jp/items/134084642' },
-    { category: 'roasted', name: 'タンザニア コンゴニ', origin: 'Bright · Clean / 160g', desc: '軽やかでスッキリ、キリマンジャロの爽やかさ。', label: 'Medium', price: '¥1,810', image: 'images/product-02.jpg', url: 'https://hasabacoffee.theshop.jp/items/128860234' },
-    { category: 'roasted', name: 'インドネシア マンデリン', origin: 'Deep · Rich / 135g', desc: '深いコクと香ばしさ。アイスコーヒーにも。', label: 'Dark', price: '¥1,639', image: 'images/product-03.jpg', url: 'https://hasabacoffee.theshop.jp/items/128859947' },
-    { category: 'roasted', name: 'コスタリカ サンタルシア', origin: 'Floral · EM / 160g', desc: 'EM菌農法。フローラルな香りと透明感のある味。', label: 'Medium', price: '¥2,110', image: 'images/product-04.jpg', url: 'https://hasabacoffee.theshop.jp/items/144072948' },
-    { category: 'roasted', name: 'エチオピア モカ シダモ', origin: 'Mocha · Juicy / 160g', desc: 'コーヒーの原点。モカフレーバーとジューシーな余韻。', label: 'Medium', price: '¥2,010', image: 'images/product-05.jpg', url: 'https://hasabacoffee.theshop.jp/items/144072738' },
-    { category: 'roasted', name: 'ケニア エンブ', origin: 'Wild · Aromatic / 135g', desc: 'ワイルドさと極上のアロマ。一目置かれる一杯。', label: 'Dark', price: '¥1,650', image: 'images/product-06.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073131' },
-    { category: 'roasted', name: 'イーストティモール レテフォホ', origin: 'Citrus · Body / 190g', desc: '柑橘系の個性的な香りとしっかりしたコク。', label: 'Light', price: '¥1,890', image: 'images/product-07.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073186' },
+    { category: 'roasted', name: 'お試し3種飲み比べセット', origin: '浅・中・深 / ミニボトル×3本', desc: '浅煎り・中煎り・深煎りの違いを楽しむセット。販売状況は商品ページでご確認ください。', label: 'Set', image: 'images/product-08.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073495' },
+    { category: 'roasted', name: 'パプアニューギニア コルブラン モリタ区画', origin: 'Floral · Fruity / 190g', desc: '華やかな香りとフルーティーな酸味。朝の一杯に。', label: 'Light', image: 'images/product-01.jpg', url: 'https://hasabacoffee.theshop.jp/items/134084642' },
+    { category: 'roasted', name: 'タンザニア コンゴニ', origin: 'Bright · Clean / 160g', desc: '軽やかでスッキリ、キリマンジャロの爽やかさ。', label: 'Medium', image: 'images/product-02.jpg', url: 'https://hasabacoffee.theshop.jp/items/128860234' },
+    { category: 'roasted', name: 'インドネシア マンデリン', origin: 'Deep · Rich / 135g', desc: '深いコクと香ばしさ。アイスコーヒーにも。', label: 'Dark', image: 'images/product-03.jpg', url: 'https://hasabacoffee.theshop.jp/items/128859947' },
+    { category: 'roasted', name: 'コスタリカ サンタルシア', origin: 'Floral · EM / 160g', desc: 'EM菌農法。フローラルな香りと透明感のある味。', label: 'Medium', image: 'images/product-04.jpg', url: 'https://hasabacoffee.theshop.jp/items/144072948' },
+    { category: 'roasted', name: 'エチオピア モカ シダモ', origin: 'Mocha · Juicy / 160g', desc: 'コーヒーの原点。モカフレーバーとジューシーな余韻。', label: 'Medium', image: 'images/product-05.jpg', url: 'https://hasabacoffee.theshop.jp/items/144072738' },
+    { category: 'roasted', name: 'ケニア エンブ', origin: 'Wild · Aromatic / 135g', desc: 'ワイルドさと極上のアロマ。一目置かれる一杯。', label: 'Dark', image: 'images/product-06.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073131' },
+    { category: 'roasted', name: 'イーストティモール レテフォホ', origin: 'Citrus · Body / 190g', desc: '柑橘系の個性的な香りとしっかりしたコク。', label: 'Light', image: 'images/product-07.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073186' },
 
     // 生豆 (green) — 8 items
-    { category: 'green', name: '生豆お試し3種セット', origin: '100g×3種 / アソート', desc: '産地の違いを焙煎しながら比べられる入門セット。', label: 'Set', price: '¥2,500', image: 'images/product-16.jpg', url: 'https://hasabacoffee.theshop.jp/items/144081068' },
-    { category: 'green', name: 'エチオピア モカ シダモ 生豆', origin: 'New Crop / Natural / 100g', desc: '自家焙煎の練習に最適。モカフレーバーの代表格。', label: 'Green', price: '¥924', image: 'images/product-09.jpg', url: 'https://hasabacoffee.theshop.jp/items/128560013' },
-    { category: 'green', name: 'ケニア エンブ 生豆', origin: 'New Crop / Washed / 100g', desc: '深いコクと香り。焙煎しがいのある高級豆。', label: 'Green', price: '¥889', image: 'images/product-10.jpg', url: 'https://hasabacoffee.theshop.jp/items/128560737' },
-    { category: 'green', name: 'コスタリカ サンタルシア 生豆', origin: 'EM / Honey / 100g', desc: 'EM菌農法による無農薬栽培の透明感ある一品。', label: 'Green', price: '¥978', image: 'images/product-11.jpg', url: 'https://hasabacoffee.theshop.jp/items/128558159' },
-    { category: 'green', name: 'イーストティモール 生豆', origin: 'New Crop / Washed / 100g', desc: '個性的な香りと柑橘系の余韻。コクも豊か。', label: 'Green', price: '¥825', image: 'images/product-12.jpg', url: 'https://hasabacoffee.theshop.jp/items/128560928' },
-    { category: 'green', name: 'パプアニューギニア 生豆', origin: 'New Crop / Washed / 100g', desc: '華やかさとボディ感のバランスが秀逸。', label: 'Green', price: '¥870', image: 'images/product-13.jpg', url: 'https://hasabacoffee.theshop.jp/items/132449473' },
-    { category: 'green', name: 'タンザニア 生豆', origin: 'New Crop / Washed / 100g', desc: 'キリマンジャロ系の爽やかな酸味と切れ味。', label: 'Green', price: '¥861', image: 'images/product-14.jpg', url: 'https://hasabacoffee.theshop.jp/items/128559675' },
-    { category: 'green', name: 'インドネシア マンデリン 生豆', origin: 'New Crop / Wet Hulling / 100g', desc: '深煎り向け。コクと口当たりのキレが魅力。', label: 'Green', price: '¥885', image: 'images/product-15.jpg', url: 'https://hasabacoffee.theshop.jp/items/128561177' },
+    { category: 'green', name: '生豆お試し3種セット', origin: '100g×3種 / アソート', desc: '産地の違いを焙煎しながら比べられる入門セット。', label: 'Set', image: 'images/product-16.jpg', url: 'https://hasabacoffee.theshop.jp/items/144081068' },
+    { category: 'green', name: 'エチオピア モカ シダモ 生豆', origin: 'New Crop / Natural / 100g', desc: '自家焙煎の練習に最適。モカフレーバーの代表格。', label: 'Green', image: 'images/product-09.jpg', url: 'https://hasabacoffee.theshop.jp/items/128560013' },
+    { category: 'green', name: 'ケニア エンブ 生豆', origin: 'New Crop / Washed / 100g', desc: '深いコクと香り。焙煎しがいのある高級豆。', label: 'Green', image: 'images/product-10.jpg', url: 'https://hasabacoffee.theshop.jp/items/128560737' },
+    { category: 'green', name: 'コスタリカ サンタルシア 生豆', origin: 'EM / Honey / 100g', desc: 'EM菌農法による無農薬栽培の透明感ある一品。', label: 'Green', image: 'images/product-11.jpg', url: 'https://hasabacoffee.theshop.jp/items/128558159' },
+    { category: 'green', name: 'イーストティモール 生豆', origin: 'New Crop / Washed / 100g', desc: '個性的な香りと柑橘系の余韻。コクも豊か。', label: 'Green', image: 'images/product-12.jpg', url: 'https://hasabacoffee.theshop.jp/items/128560928' },
+    { category: 'green', name: 'パプアニューギニア 生豆', origin: 'New Crop / Washed / 100g', desc: '華やかさとボディ感のバランスが秀逸。', label: 'Green', image: 'images/product-13.jpg', url: 'https://hasabacoffee.theshop.jp/items/132449473' },
+    { category: 'green', name: 'タンザニア 生豆', origin: 'New Crop / Washed / 100g', desc: 'キリマンジャロ系の爽やかな酸味と切れ味。', label: 'Green', image: 'images/product-14.jpg', url: 'https://hasabacoffee.theshop.jp/items/128559675' },
+    { category: 'green', name: 'インドネシア マンデリン 生豆', origin: 'New Crop / Wet Hulling / 100g', desc: '深煎り向け。コクと口当たりのキレが魅力。', label: 'Green', image: 'images/product-15.jpg', url: 'https://hasabacoffee.theshop.jp/items/128561177' },
 
     // 定期便 (subscription) — 3 items
-    { category: 'subscription', name: '焙煎豆スタンダード便', origin: '毎月・3種ミニボトル', desc: '人気の焙煎豆を3種お試しサイズで毎月お届け。', label: 'Monthly', price: '¥2,480', image: 'images/product-17.jpg', url: 'https://hasabacoffee.theshop.jp/items/141139263' },
-    { category: 'subscription', name: '生豆飲み比べ便 100g x3', origin: '2ヶ月毎・100g×3種', desc: '産地の違いを楽しむ、自家焙煎ファンの定番。', label: 'Bi-Monthly', price: '¥1,950', image: 'images/product-19.jpg', url: 'https://hasabacoffee.theshop.jp/items/130489212' },
-    { category: 'subscription', name: '生豆たっぷり便 300g x3', origin: '2ヶ月毎・300g×3種', desc: 'じっくり焙煎を楽しみたい方への大容量プラン。', label: 'Bi-Monthly', price: '¥5,500', image: 'images/product-20.jpg', url: 'https://hasabacoffee.theshop.jp/items/130489397' },
+    { category: 'subscription', name: '焙煎豆スタンダード便', origin: '毎月・3種ミニボトル', desc: '人気の焙煎豆を3種お試しサイズで毎月お届け。', label: 'Monthly', image: 'images/product-17.jpg', url: 'https://hasabacoffee.theshop.jp/items/141139263' },
+    { category: 'subscription', name: '生豆飲み比べ便 100g x3', origin: '2ヶ月毎・100g×3種', desc: '産地の違いを楽しむ、自家焙煎ファンの定番。', label: 'Bi-Monthly', image: 'images/product-19.jpg', url: 'https://hasabacoffee.theshop.jp/items/130489212' },
+    { category: 'subscription', name: '生豆たっぷり便 300g x3', origin: '2ヶ月毎・300g×3種', desc: 'じっくり焙煎を楽しみたい方への大容量プラン。', label: 'Bi-Monthly', image: 'images/product-20.jpg', url: 'https://hasabacoffee.theshop.jp/items/130489397' },
 
     // ギフト (gift) — 4 items
-    { category: 'gift', name: '旬の豆ギフトボックス', origin: '季節の3種セット / ギフトラッピング', desc: '旬の豆を厳選してお届けする、コーヒー好きへの特別なギフト。', label: 'Box', price: '¥6,000', image: 'images/product-37.jpg', url: 'https://hasabacoffee.theshop.jp/items/143492554' },
-    { category: 'gift', name: '3種飲み比べ ミニボトルセット', origin: '浅・中・深 / ミニボトル×3本', desc: '焙煎度の違いを楽しむ、カジュアルなギフトに最適。', label: 'Set', price: '¥3,000', image: 'images/product-08.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073495' },
-    { category: 'gift', name: 'ドリップバッグセット 3個入', origin: '浅・中・深 / ドリップバッグ×3', desc: 'お湯を注ぐだけで本格コーヒー。ちょっとしたお礼に。', label: 'Drip', price: '¥1,200', image: 'images/product-38.jpg', url: 'https://hasabacoffee.theshop.jp/items/144074726' },
-    { category: 'gift', name: 'ドリップバッグセット 6個入', origin: '6種アソート / ドリップバッグ×6', desc: 'バリエーション豊かなドリップバッグ。長く楽しめる贈り物。', label: 'Drip', price: '¥2,400', image: 'images/product-39.jpg', url: 'https://hasabacoffee.theshop.jp/items/144075973' },
+    { category: 'gift', name: '旬の豆ギフトボックス', origin: '季節の3種セット / ギフトラッピング', desc: '旬の豆を厳選してお届けする、コーヒー好きへの特別なギフト。', label: 'Box', image: 'images/product-37.jpg', url: 'https://hasabacoffee.theshop.jp/items/143492554' },
+    { category: 'gift', name: '3種飲み比べ ミニボトルセット', origin: '浅・中・深 / ミニボトル×3本', desc: '焙煎度の違いを楽しむ、カジュアルなギフトに最適。', label: 'Set', image: 'images/product-08.jpg', url: 'https://hasabacoffee.theshop.jp/items/144073495' },
+    { category: 'gift', name: 'ドリップバッグセット 3個入', origin: '浅・中・深 / ドリップバッグ×3', desc: 'お湯を注ぐだけで本格コーヒー。ちょっとしたお礼に。', label: 'Drip', image: 'images/product-38.jpg', url: 'https://hasabacoffee.theshop.jp/items/144074726' },
+    { category: 'gift', name: 'ドリップバッグセット 6個入', origin: '6種アソート / ドリップバッグ×6', desc: 'バリエーション豊かなドリップバッグ。長く楽しめる贈り物。', label: 'Drip', image: 'images/product-39.jpg', url: 'https://hasabacoffee.theshop.jp/items/144075973' },
 
-    // 焙煎器・グッズ (goods) — 5 items (URL未提供のためショップTOPへフォールバック)
-    { category: 'goods', name: '新型オリジナルロースター', origin: '焙煎器 / 単品', desc: '自宅で本格焙煎が楽しめる、コンパクト型ロースター。', label: 'Roaster', price: '¥8,800', image: 'images/product-25.jpg' },
-    { category: 'goods', name: 'ロースタースターターセット', origin: '焙煎器 + 生豆 100g', desc: '初めて焙煎する方向け。器具一式と生豆がセットに。', label: 'Set', price: '¥15,000', image: 'images/product-26.jpg' },
-    { category: 'goods', name: 'ハンドドリップ基本セット', origin: 'ドリッパー・サーバー他', desc: '【店頭限定】ドリップに必要な道具一式。豆ミニボトル付き。', label: 'Set', price: '¥3,800', image: 'images/product-27.jpg' },
-    { category: 'goods', name: '電動コーヒーミルセット', origin: '電動ミル + 焙煎豆', desc: '【店頭限定】家庭で挽きたてを楽しむ、入門ミルセット。', label: 'Set', price: '¥4,500', image: 'images/product-28.jpg' },
-    { category: 'goods', name: 'ハンドドリップDXセット', origin: '基本セット + 電動ミル', desc: '【店頭限定】一通り揃う、ドリップ・自家挽きの完全セット。', label: 'Premium', price: '¥7,400', image: 'images/product-29.jpg' },
+    // 焙煎器・グッズ (goods) — URL未連携の商品は店舗案内へ。EC販売中とは表示しない。
+    { category: 'goods', name: '新型オリジナルロースター', origin: '焙煎器 / 単品', desc: '自宅で本格焙煎が楽しめる、コンパクト型ロースター。', label: 'Roaster', image: 'images/product-25.jpg' },
+    { category: 'goods', name: 'ロースタースターターセット', origin: '焙煎器 + 生豆 100g', desc: '初めて焙煎する方向け。器具一式と生豆がセットに。', label: 'Set', image: 'images/product-26.jpg' },
+    { category: 'goods', name: 'ハンドドリップ基本セット', origin: 'ドリッパー・サーバー他', desc: '【店頭限定】ドリップに必要な道具一式。豆ミニボトル付き。', label: 'Set', image: 'images/product-27.jpg' },
+    { category: 'goods', name: '電動コーヒーミルセット', origin: '電動ミル + 焙煎豆', desc: '【店頭限定】家庭で挽きたてを楽しむ、入門ミルセット。', label: 'Set', image: 'images/product-28.jpg' },
+    { category: 'goods', name: 'ハンドドリップDXセット', origin: '基本セット + 電動ミル', desc: '【店頭限定】一通り揃う、ドリップ・自家挽きの完全セット。', label: 'Premium', image: 'images/product-29.jpg' },
     // 以下、commented-out / 将来追加予定
-    //{ category: 'subscription', name: '浅煎り定期便', label: 'Light', price: '¥2,500', image: 'images/product-21.jpg' },
-    //{ category: 'subscription', name: '深煎り定期便', label: 'Dark', price: '¥2,500', image: 'images/product-22.jpg' },
-    //{ category: 'goods', name: '専用ペーパーフィルター', label: 'Filter', price: '¥600', image: 'images/product-30.jpg' },
-    //{ category: 'goods', name: '耐圧保存ボトル', label: 'Bottle', price: '¥300', image: 'images/product-31.jpg' },
-    //{ category: 'goods', name: '宮古島やちむんマグ', label: 'Local', price: '¥2,500', image: 'images/product-32.jpg' }
+    //{ category: 'subscription', name: '浅煎り定期便', label: 'Light', image: 'images/product-21.jpg' },
+    //{ category: 'subscription', name: '深煎り定期便', label: 'Dark', image: 'images/product-22.jpg' },
+    //{ category: 'goods', name: '専用ペーパーフィルター', label: 'Filter', image: 'images/product-30.jpg' },
+    //{ category: 'goods', name: '耐圧保存ボトル', label: 'Bottle', image: 'images/product-31.jpg' },
+    //{ category: 'goods', name: '宮古島やちむんマグ', label: 'Local', image: 'images/product-32.jpg' }
   ];
 
   const SHOP_URL = 'https://hasabacoffee.theshop.jp/';
@@ -2812,14 +2899,38 @@
     return 'medium';
   }
 
-  function renderProducts(category) {
-    if (!productSlider) return;
-    const items = PRODUCTS.filter(p => p.category === category);
-    productSlider.innerHTML = items.map(p => {
-      const badge = getBadgeClass(p);
-      const url = p.url || SHOP_URL;
+  function baseProductWidgetUrl(value) {
+    // Product URLs are fixed local catalog entries, never arbitrary proxy targets.
+    try {
+      const url = new URL(value);
+      if (url.origin !== 'https://hasabacoffee.theshop.jp' || url.username || url.password ||
+          !/^\/items\/[1-9]\d*$/.test(url.pathname) || url.search || url.hash) return null;
+      return `${url.href}/widget/small`;
+    } catch { return null; }
+  }
+
+  function renderProductCard(p) {
+    const badge = getBadgeClass(p);
+    const widgetUrl = baseProductWidgetUrl(p.url);
+    if (widgetUrl) {
       return `
-      <a class="product-card" data-badge="${badge}" href="${escapeHtml(url)}" target="_blank" rel="noopener" aria-label="${escapeHtml(p.name)}の商品詳細を見る">
+      <article class="product-card product-card-live" data-badge="${badge}">
+        <iframe class="base-product-widget" src="${escapeHtml(widgetUrl)}"
+          title="${escapeHtml(p.name)}：BASEの商品画像と価格" width="280" height="220"
+          loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <div class="product-card-body">
+          <span class="product-roast ${badge}">${escapeHtml(p.label)}</span>
+          <h4 class="product-name">${escapeHtml(p.name)}</h4>
+          <p class="product-desc">${escapeHtml(p.desc)}</p>
+          <div class="product-card-footer">
+            <span class="base-widget-fallback">${p.category === 'subscription' ? '初回価格を表示。2回目以降の料金・条件はBASEで確認。' : '在庫・送料はBASEで確認。'}価格が表示されない場合も商品ページをご覧ください。</span>
+            <a class="btn-text" href="${escapeHtml(p.url)}" target="_blank" rel="noopener" aria-label="${escapeHtml(p.name)}をBASEで確認">BASEで確認 →</a>
+          </div>
+        </div>
+      </article>`;
+    }
+    return `
+      <article class="product-card product-card-store" data-badge="${badge}">
         <div class="img-slot product-card-img aspect-1-1" data-fallback="[ ${escapeHtml(p.label)} ]">
           <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.name)}" loading="lazy" />
         </div>
@@ -2829,13 +2940,19 @@
           <p class="product-origin">${escapeHtml(p.origin)}</p>
           <p class="product-desc">${escapeHtml(p.desc)}</p>
           <div class="product-card-footer">
-            <p class="product-price">${escapeHtml(p.price)}<small>tax in</small></p>
-            <span class="btn-text">詳細を見る →</span>
+            <p class="product-availability">価格・取扱状況は店舗へお問い合わせください。</p>
+            <a href="#stores" class="btn-text">店舗案内 →</a>
           </div>
         </div>
-      </a>
-    `;
-    }).join('');
+      </article>`;
+  }
+
+  function renderProducts(category) {
+    if (!productSlider) return;
+    // Only the selected category exists in the DOM. Native lazy loading delays
+    // off-screen widgets; there is no eager load of all 22 distinct EC products.
+    const items = PRODUCTS.filter(p => p.category === category);
+    productSlider.innerHTML = items.map(renderProductCard).join('');
     bindImgFallback(productSlider);
     productSlider.scrollLeft = 0;
     updateSliderArrows();
