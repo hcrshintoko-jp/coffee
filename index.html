@@ -1942,11 +1942,35 @@
      ========================================================= -->
 <section id="top" class="hero">
   <div class="hero-media parallax-bg">
-    <video autoplay muted loop playsinline poster="images/hero-poster.jpg">
-      <source src="images/hero.webm" type="video/webm" />
-      <source src="images/hero.mp4" type="video/mp4" />
+    <!-- poster は下のスクリプトで PC/スマホ別に設定（スマホでPC用ポスターを無駄にDLしないため） -->
+    <video id="hero-video" autoplay muted loop playsinline data-poster-pc="images/hero-poster.jpg">
+      <!-- PC (769px〜): 既存のヒーロー動画 -->
+      <source src="images/hero.webm" type="video/webm" media="(min-width: 769px)" />
+      <source src="images/hero.mp4" type="video/mp4" media="(min-width: 769px)" />
+      <!-- スマホ: JS無効時のフォールバック (JS有効時は下のスクリプトで01/03からランダム) -->
+      <source src="images/hero-sp-01.mp4" type="video/mp4" />
     </video>
   </div>
+  <script>
+    // スマホ(〜768px)では焙煎ワークショップ動画 hero-sp-01 / 03 からランダムに1本を再生
+    // パース直後に実行して、フォールバック動画の読み込みが進む前に差し替える
+    (function () {
+      var v = document.getElementById('hero-video');
+      if (!v) return;
+      if (!window.matchMedia('(max-width: 768px)').matches) {
+        v.poster = v.getAttribute('data-poster-pc'); // PC: 従来どおりのポスター
+        return;
+      }
+      var clips = ['01', '03']; // 02 は第三者の透かし入りのため除外
+      var n = clips[Math.floor(Math.random() * clips.length)];
+      v.poster = 'images/hero-sp-' + n + '.jpg';
+      v.src = 'images/hero-sp-' + n + '.mp4'; // src 属性は <source> より優先される
+      v.muted = true; // iOS の自動再生条件
+      v.load();
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {}); // 低電力モード等で自動再生が拒否された場合はポスター表示のまま
+    })();
+  </script>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-tagline">HASABA COFFEE ROASTERS®</p>
