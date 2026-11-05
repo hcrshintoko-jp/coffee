@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-campaign="winter-gift-2026">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1851,6 +1851,50 @@
     .hero-ctas .btn { padding-top: 13px; padding-bottom: 13px; }
   }
 
+
+  /* Seasonal presentation: set html data-campaign="regular" to restore normal content. */
+  html[data-campaign="winter-gift-2026"] [data-campaign-only="regular"],
+  html:not([data-campaign="winter-gift-2026"]) [data-campaign-only="winter"] { display: none !important; }
+  #winter-gifts, #store-shintoko { scroll-margin-top: 90px; }
+  .winter-notice { padding: 64px 0; background: var(--color-warm-beige); }
+  .winter-notice-inner { display: grid; grid-template-columns: 1.15fr .85fr; gap: 64px; align-items: center; }
+  .winter-notice h2 { font-family: var(--font-display); font-size: clamp(30px, 3.7vw, 48px); line-height: 1.5; margin: 20px 0; }
+  .winter-notice p { font-size: 14px; line-height: 2; }
+  .winter-notice .winter-status { display: inline-block; color: var(--color-roast-red); border: 1px solid currentColor; border-radius: var(--radius-badge); font-weight: 700; padding: 5px 14px; margin-bottom: 16px; }
+  .winter-notice .winter-actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 26px 0 14px; }
+  .winter-notice .winter-note { font-size: 12px; color: var(--color-muted-taupe); }
+  .winter-notice-image { margin: 0; max-width: 360px; justify-self: center; }
+  .winter-notice-image img { display: block; width: 100%; height: auto; aspect-ratio: 3/4; object-fit: contain; border-radius: var(--radius-card); }
+  .winter-notice-image figcaption { font-size: 11px; margin-top: 8px; text-align: center; }
+  .product-slider.is-winter-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; overflow: visible; scroll-snap-type: none; cursor: auto; padding: 0; }
+  .product-slider.is-winter-grid .product-card { width: auto; min-width: 0; flex: initial; }
+  .product-card-winter { display: flex; flex-direction: column; }
+  .product-card-winter .winter-product-photo { display: block; }
+  .product-card-winter .winter-product-photo img { display: block; width: 100%; aspect-ratio: 3/4; object-fit: contain; }
+  .product-card-winter .product-card-body { display: flex; flex: 1; flex-direction: column; }
+  .product-card-winter .product-name { min-height: 2.8em; line-height: 1.4; }
+  .product-card-winter .product-desc { margin: 10px 0 16px; }
+  .product-card-winter .product-card-footer { margin-top: auto; }
+  .winter-card-state { font-size: 11px; color: var(--color-roast-red); font-weight: 700; margin: 12px 0 8px; }
+  .winter-card-price { font-family: var(--font-display); font-size: 22px; font-weight: 700; line-height: 1.5; }
+  .winter-card-price small { font-family: var(--font-body); font-size: 10px; font-weight: 400; display: block; }
+  .product-slider-controls[hidden] { display: none !important; }
+  @media (max-width: 719px) {
+    .winter-notice { padding: 40px 0; }
+    .winter-notice-inner { grid-template-columns: 1fr; gap: 28px; }
+    .winter-notice h2 { font-size: 30px; }
+    .winter-notice-image { max-width: 280px; }
+    .winter-notice .winter-actions { flex-direction: column; }
+    .winter-notice .winter-actions .btn { width: 100%; }
+    .product-slider.is-winter-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; }
+    .product-card-winter .product-card-body { padding: 13px 10px 16px; }
+    .product-card-winter .product-name { font-size: 14px; min-height: 3em; }
+    .product-card-winter .product-desc { display: none; }
+    .product-card-winter .winter-card-price { font-size: 21px; }
+    .product-card-winter .btn-text { font-size: 12px; padding-block: 10px; min-height: 44px; display: inline-flex; align-items: center; }
+    .product-card-winter .product-roast { font-size: 8px; align-self: flex-start; }
+  }
+
 </style>
 
 <!-- Google tag (gtag.js) -->
@@ -1882,7 +1926,8 @@
         <li><a href="#faq">FAQ</a></li>
       </ul>
     </nav>
-    <a href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary header-cta">コーヒー豆を購入</a>
+    <a data-campaign-only="regular" href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary header-cta">コーヒー豆を購入</a>
+      <a data-campaign-only="winter" href="https://shintoko.hasabacoffee.com/" target="_blank" rel="noopener" class="btn btn-primary header-cta">冬ギフトを見る</a>
     <button class="menu-toggle" aria-label="メニュー" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -1897,16 +1942,17 @@
     </button>
     <div class="mobile-nav-inner">
       <div class="mobile-cta-group">
-        <a href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary">コーヒー豆を購入する</a>
+        <a data-campaign-only="regular" href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary">コーヒー豆を購入する</a>
+      <a data-campaign-only="winter" href="https://shintoko.hasabacoffee.com/" target="_blank" rel="noopener" class="btn btn-primary">冬ギフトを見る</a>
         <a href="https://lin.ee/oGAqwMo" target="_blank" rel="noopener" class="btn btn-mellow">LINEで友だち追加</a>
       </div>
       <div class="mobile-nav-section">
         <h5 class="mobile-nav-heading">Products / 商品</h5>
         <ul>
           <li><a href="#products">商品ラインナップ</a></li>
-          <li><a href="#starter">3種飲み比べセット</a></li>
+          <li><a href="#starter" data-campaign-only="regular">3種飲み比べセット</a></li>
           <li><a href="#subscription">定期便</a></li>
-          <li><a href="#gift">ギフト</a></li>
+          <li><a href="#gift" data-campaign-only="regular">ギフト</a><a href="#winter-gifts" data-campaign-only="winter">冬ギフト</a></li>
         </ul>
       </div>
       <div class="mobile-nav-section">
@@ -1982,17 +2028,19 @@
     </p>
     <p class="hero-subtitle">沖縄・宮古島発、ニュークロップだけを焙煎後すぐに全国へ。<br />フレッシュな香りをそのままご自宅へお届けします。</p>
     <div class="hero-ctas">
-      <a href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary">コーヒー豆を通販で買う</a>
+      <a data-campaign-only="regular" href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary">コーヒー豆を通販で買う</a>
+      <a data-campaign-only="winter" href="https://shintoko.hasabacoffee.com/" target="_blank" rel="noopener" class="btn btn-primary">冬ギフトを見る</a>
       <a href="https://www.google.com/maps/place/HASABA+COFFEE+%E6%96%B0%E6%89%80%E6%B2%A2%E5%BA%97/@35.807828,139.4573459,17z/data=!3m1!5s0x6018ddc548f602e7:0x3e7e6f789235bbb6!4m15!1m8!3m7!1s0x6018ddc54861b555:0x8bf08e8c848a8506!2z44CSMzU5LTAwNDQg5Z-8546J55yM5omA5rKi5biC5p2-6JGJ55S677yR77yW4oiS77yR77yU!3b1!8m2!3d35.807828!4d139.4573459!16s%2Fg%2F12hk9c22k!3m5!1s0x6018dd5656f66507:0x386c0ee9c1a4a0dc!8m2!3d35.8077914!4d139.4573781!16s%2Fg%2F11yj_97h43" target="_blank" rel="noopener" class="btn btn-ghost-light">新所沢店の地図・行き方</a>
           <a href="#workshop" class="btn btn-ghost-light">ワークショップを予約する</a>
     </div>
-    <p class="hero-microcopy">定期便あり・全国発送OK</p>
+    <p class="hero-microcopy" data-campaign-only="regular">定期便あり・全国発送OK</p>
+    <p class="hero-microcopy" data-campaign-only="winter">冬のコーヒーギフト、まもなく販売開始</p>
   </div>
   <div class="hero-scroll">SCROLL</div>
 </section>
 
 <!-- Store access and online shopping -->
-<section id="shintoko-guide" class="shintoko-guide" aria-labelledby="shintoko-guide-title">
+<section id="shintoko-guide" data-campaign-only="regular" class="shintoko-guide" aria-labelledby="shintoko-guide-title">
   <div class="container">
     <span class="section-label">Shintokorozawa</span>
     <h2 id="shintoko-guide-title">新所沢店をお探しの方へ</h2>
@@ -2018,6 +2066,29 @@
       </div>
       <iframe class="shintoko-map" src="https://www.google.com/maps?q=%E5%9F%BC%E7%8E%89%E7%9C%8C%E6%89%80%E6%B2%A2%E5%B8%82%E6%9D%BE%E8%91%89%E7%94%BA16-14&amp;output=embed" title="新所沢店のアクセス地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
+  </div>
+</section>
+
+
+<!-- Winter gift notice; original Shintoko guidance above remains available in regular mode. -->
+<section id="winter-gifts" class="winter-notice" data-campaign-only="winter" aria-labelledby="winter-gifts-title">
+  <div class="container winter-notice-inner">
+    <div>
+      <span class="section-label">Winter Gift 2026 · Shintoko</span>
+      <h2 id="winter-gifts-title">この冬、ひと息つく<br />時間を贈ろう。</h2>
+      <p class="winter-status">まもなく販売開始</p>
+      <p>ありがとうの気持ちに、コーヒーの香りを添えて。<br />コーヒーと焼き菓子、3色から選べるタンブラー。<br />新所沢店から、5つの冬ギフトをご紹介します。</p>
+      <div class="winter-actions">
+        <a class="btn btn-primary btn-arrow" href="https://shintoko.hasabacoffee.com/" target="_blank" rel="noopener">冬ギフト特設ページを見る</a>
+        <a class="btn btn-ghost" href="#products">5つのギフトを見る</a>
+      </div>
+      <p class="winter-note">フィナンシェの準備が整い次第、販売を開始します。<br />開始日は決まり次第、特設ページでご案内します。</p>
+      <p class="winter-note"><a href="#store-shintoko">新所沢店の場所・営業時間はこちら →</a></p>
+    </div>
+    <figure class="winter-notice-image">
+      <a href="https://shintoko.hasabacoffee.com/#gift-4" target="_blank" rel="noopener" aria-label="豆3種と焼き菓子のセット内容を見る"><img src="https://shintoko.hasabacoffee.com/assets/gift-4.webp" width="1086" height="1448" loading="lazy" alt="豆3種とドリップバッグ、焼き菓子の冬ギフト" /></a>
+      <figcaption>豆3種と焼き菓子 ／ 写真はセットの見本です。</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -2180,10 +2251,11 @@
     <div class="section-head center reveal">
       <span class="section-label">Products</span>
       <h2 class="section-title">商品ラインナップ</h2>
-      <p class="section-lead">産地ごとに表情の異なる、選び抜かれた7つの豆。<br />焙煎度合いと産地の組合わせで、あなたの一杯が決まります。</p>
+      <p data-campaign-only="regular" class="section-lead">産地ごとに表情の異なる、選び抜かれた7つの豆。<br />焙煎度合いと産地の組合わせで、あなたの一杯が決まります。</p>
+      <p class="section-lead" data-campaign-only="winter">冬のごあいさつに、コーヒーの贈りもの。<br />5つの冬ギフトを、写真とともにご紹介します。</p>
     </div>
 
-    <div id="starter" class="starter reveal">
+    <div id="starter" class="starter reveal" data-campaign-only="regular">
       <div class="img-slot starter-img aspect-16-10" data-fallback="[ STARTER ・ 3種お試しセット ]">
         <img src="images/starter.jpg" alt="3種お試しセット" loading="lazy" />
       </div>
@@ -2204,6 +2276,7 @@
     </div>
 
     <div class="product-tabs reveal" role="tablist" aria-label="商品カテゴリー">
+      <button class="product-tab" data-campaign-only="winter" data-category="winter" role="tab" aria-selected="false">冬ギフト</button>
       <button class="product-tab is-active" data-category="roasted" role="tab" aria-selected="true">焙煎豆</button>
       <button class="product-tab" data-category="green" role="tab" aria-selected="false">生豆</button>
       <button class="product-tab" data-category="subscription" role="tab" aria-selected="false">定期便</button>
@@ -2211,7 +2284,7 @@
       <button class="product-tab" data-category="goods" role="tab" aria-selected="false">焙煎器・グッズ</button>
     </div>
 
-    <p class="base-widget-note">商品画像・価格はBASEから読み込んで表示しています。在庫・送料・発送目安は、各商品の「BASEで確認」からご確認ください。</p>
+    <p class="base-widget-note" id="product-catalog-note">商品画像・価格はBASEから読み込んで表示しています。在庫・送料・発送目安は、各商品の「BASEで確認」からご確認ください。</p>
     <div class="product-slider-wrap reveal">
       <div class="product-slider-controls">
         <button class="slider-btn slider-prev" type="button" aria-label="前の商品へ"><span aria-hidden="true">←</span></button>
@@ -2224,8 +2297,10 @@
 
     <div class="products-cta reveal">
       <div class="cta-stack">
-        <a href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary btn-arrow">すべての商品を見る</a>
-        <span class="cta-microcopy">価格・在庫・送料はBASEの商品ページでご確認ください。</span>
+        <a data-campaign-only="regular" href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary btn-arrow">すべての商品を見る</a>
+      <a data-campaign-only="winter" href="https://shintoko.hasabacoffee.com/" target="_blank" rel="noopener" class="btn btn-primary btn-arrow">冬ギフトを見る</a>
+        <span class="cta-microcopy" data-campaign-only="regular">価格・在庫・送料はBASEの商品ページでご確認ください。</span>
+        <span class="cta-microcopy" data-campaign-only="winter">各セットの内容と販売開始のお知らせを特設ページでご確認いただけます。</span>
       </div>
     </div>
   </div>
@@ -2460,7 +2535,7 @@
         </div>
       </article>
 
-      <article class="store-card reveal parallax-card">
+      <article id="store-shintoko" class="store-card reveal parallax-card">
         <div class="img-slot store-card-img aspect-4-3" data-fallback="[ STORE ・ 新所沢店 ]">
           <img src="images/store-shintoko.jpg" alt="HASABA COFFEE 新所沢店" loading="lazy" />
         </div>
@@ -2701,10 +2776,13 @@
 <section id="contact" class="final-cta">
   <div class="final-cta-inner reveal">
     <span class="section-label">Get Started</span>
-    <h2>「焙煎したて」の<br />一杯から始めませんか。</h2>
-    <p>オンラインショップで気軽に、店舗でじっくりと、ワークショップで深く。<br />ご質問・ご相談は公式LINEからどうぞ。</p>
+    <h2 data-campaign-only="regular">「焙煎したて」の<br />一杯から始めませんか。</h2>
+    <h2 data-campaign-only="winter">大切な人の、<br />日常のひと息に。</h2>
+    <p data-campaign-only="regular">オンラインショップで気軽に、店舗でじっくりと、ワークショップで深く。<br />ご質問・ご相談は公式LINEからどうぞ。</p>
+    <p data-campaign-only="winter">ありがとうを伝える冬のコーヒーギフト。まもなく販売開始です。<br />贈りもののご相談は、新所沢店の公式LINEへどうぞ。</p>
     <div class="final-cta-buttons">
-      <a href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary">コーヒー豆を購入する</a>
+      <a data-campaign-only="regular" href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="btn btn-primary">コーヒー豆を購入する</a>
+      <a data-campaign-only="winter" href="https://shintoko.hasabacoffee.com/" target="_blank" rel="noopener" class="btn btn-primary">冬ギフトを見る</a>
       <a href="https://lin.ee/oGAqwMo" target="_blank" rel="noopener" class="btn btn-mellow">LINEで友だち追加</a>
       <a href="#stores" class="btn btn-ghost-light">店舗を見る</a>
     </div>
@@ -2804,13 +2882,14 @@
      STICKY MOBILE CTA
      ========================================================= -->
 <!-- Floating Gift Button (mobile only) -->
-<a href="#gift" class="floating-gift" aria-label="ギフトラインナップを見る">ギフト</a>
+<a href="#gift" class="floating-gift" aria-label="ギフトラインナップを見る"><span data-campaign-only="regular">ギフト</span><span data-campaign-only="winter">冬ギフト</span></a>
 
 <div class="sticky-cta" id="sticky-cta">
-  <a href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="sticky-primary">
+  <a data-campaign-only="regular" href="https://hasabacoffee.theshop.jp/" target="_blank" rel="noopener" class="sticky-primary">
     豆を購入する
     <small>全国発送・定期便あり</small>
   </a>
+  <a data-campaign-only="winter" href="https://shintoko.hasabacoffee.com/" target="_blank" rel="noopener" class="sticky-primary">冬ギフトを見る<small>まもなく販売開始</small></a>
   <a href="https://www.google.com/maps/place/HASABA+COFFEE+%E6%96%B0%E6%89%80%E6%B2%A2%E5%BA%97/@35.807828,139.4573459,17z/data=!3m1!5s0x6018ddc548f602e7:0x3e7e6f789235bbb6!4m15!1m8!3m7!1s0x6018ddc54861b555:0x8bf08e8c848a8506!2z44CSMzU5LTAwNDQg5Z-8546J55yM5omA5rKi5biC5p2-6JGJ55S677yR77yW4oiS77yR77yU!3b1!8m2!3d35.807828!4d139.4573459!16s%2Fg%2F12hk9c22k!3m5!1s0x6018dd5656f66507:0x386c0ee9c1a4a0dc!8m2!3d35.8077914!4d139.4573781!16s%2Fg%2F11yj_97h43" target="_blank" rel="noopener" class="sticky-mellow">
     新所沢店へ行く
     <small>東口徒歩1分</small>
@@ -2890,6 +2969,62 @@
     //{ category: 'goods', name: '宮古島やちむんマグ', label: 'Local', image: 'images/product-32.jpg' }
   ];
 
+  const IS_WINTER_GIFT = document.documentElement.dataset.campaign === 'winter-gift-2026';
+  const WINTER_GIFTS = [
+  {
+    "category": "winter",
+    "id": "1",
+    "name": "ドリップギフト",
+    "desc": "お湯を注ぐ、そのひと息を贈る。気軽に手渡せる、ドリップバッグのギフト。",
+    "label": "Winter Gift",
+    "image": "https://shintoko.hasabacoffee.com/assets/gift-1.webp",
+    "detailUrl": "https://shintoko.hasabacoffee.com/#gift-1",
+    "price": 1200
+  },
+  {
+    "category": "winter",
+    "id": "2",
+    "name": "コーヒーと焼き菓子",
+    "desc": "コーヒーと焼き菓子を、ひと箱に。忙しい毎日のなかに、ゆっくり過ごす時間を。",
+    "label": "Winter Gift",
+    "image": "https://shintoko.hasabacoffee.com/assets/gift-2.webp",
+    "detailUrl": "https://shintoko.hasabacoffee.com/#gift-2",
+    "price": 2980
+  },
+  {
+    "category": "winter",
+    "id": "4",
+    "name": "豆3種と焼き菓子",
+    "desc": "3種の豆を飲み比べながら、お気に入りの一杯を。ドリップバッグと焼き菓子も詰め合わせました。",
+    "label": "Winter Gift",
+    "image": "https://shintoko.hasabacoffee.com/assets/gift-4.webp",
+    "detailUrl": "https://shintoko.hasabacoffee.com/#gift-4",
+    "price": 4890
+  },
+  {
+    "category": "winter",
+    "id": "5",
+    "name": "タンブラー付きギフト",
+    "desc": "コーヒーを楽しむ時間に、タンブラーを添えて。豆もドリップバッグも味わえる詰め合わせ。",
+    "label": "Winter Gift",
+    "image": "https://shintoko.hasabacoffee.com/assets/gift-5.webp",
+    "detailUrl": "https://shintoko.hasabacoffee.com/#gift-5",
+    "price": 6890
+  },
+  {
+    "category": "winter",
+    "id": "6",
+    "name": "タンブラー付き充実ギフト",
+    "desc": "タンブラーをふたつ。コーヒー豆と焼き菓子を囲んで、会話がゆっくりほどける時間を。",
+    "label": "Winter Gift",
+    "image": "https://shintoko.hasabacoffee.com/assets/gift-6.webp",
+    "detailUrl": "https://shintoko.hasabacoffee.com/#gift-6",
+    "price": 8480
+  }
+];
+  // Withdrawn at the owner's request. Keep historical catalog entries above, but never relist them.
+  const WITHDRAWN_PRODUCT_IDS = ['143492554', '144074726', '144075973'];
+
   const SHOP_URL = 'https://hasabacoffee.theshop.jp/';
   const productSlider = document.getElementById('product-slider');
   const productTabs = document.querySelectorAll('.product-tab');
@@ -2934,6 +3069,13 @@
   }
 
   function renderProductCard(p) {
+    if (p.category === 'winter') {
+      return `<article class="product-card product-card-winter" data-badge="gift">
+        <a class="winter-product-photo" href="${escapeHtml(p.detailUrl)}" target="_blank" rel="noopener" aria-label="${escapeHtml(p.name)}の内容を見る"><img src="${escapeHtml(p.image)}" width="1086" height="1448" alt="${escapeHtml(p.name)}のセット見本" loading="lazy" /></a>
+        <div class="product-card-body"><span class="product-roast gift">Winter Gift</span><h4 class="product-name">${escapeHtml(p.name)}</h4>
+        <p class="winter-card-price">¥${Number(p.price).toLocaleString('ja-JP')}<small>EC価格・税込・送料別</small></p>
+        <p class="product-desc">${escapeHtml(p.desc)}</p><div class="product-card-footer"><p class="winter-card-state">まもなく販売開始</p><a class="btn-text" href="${escapeHtml(p.detailUrl)}" target="_blank" rel="noopener">内容を見る →</a></div></div></article>`;
+    }
     const badge = getBadgeClass(p);
     const widgetUrl = baseProductWidgetUrl(p.url);
     if (widgetUrl) {
@@ -2975,7 +3117,13 @@
     if (!productSlider) return;
     // Only the selected category exists in the DOM. Native lazy loading delays
     // off-screen widgets; there is no eager load of all 22 distinct EC products.
-    const items = PRODUCTS.filter(p => p.category === category);
+    const isWinter = IS_WINTER_GIFT && category === 'winter';
+    const items = isWinter ? WINTER_GIFTS : PRODUCTS.filter(p => p.category === category && !WITHDRAWN_PRODUCT_IDS.some(id => p.url === `https://hasabacoffee.theshop.jp/items/${id}`));
+    productSlider.classList.toggle('is-winter-grid', isWinter);
+    const controls = document.querySelector('.product-slider-controls');
+    if (controls) controls.hidden = isWinter;
+    const note = document.getElementById('product-catalog-note');
+    if (note) note.textContent = isWinter ? 'まもなく販売開始。表示価格はEC価格（税込・送料別）です。内容・販売開始のお知らせは特設ページでご確認ください。' : '商品画像・価格はBASEから読み込んで表示しています。在庫・送料・発送目安は、各商品の「BASEで確認」からご確認ください。';
     productSlider.innerHTML = items.map(renderProductCard).join('');
     bindImgFallback(productSlider);
     productSlider.scrollLeft = 0;
@@ -3061,7 +3209,20 @@
   });
 
   // Initial render
-  renderProducts('roasted');
+  const initialCategory = IS_WINTER_GIFT ? 'winter' : 'roasted';
+  productTabs.forEach(tab => {
+    const active = tab.dataset.category === initialCategory;
+    tab.classList.toggle('is-active', active);
+    tab.setAttribute('aria-selected', String(active));
+  });
+  renderProducts(initialCategory);
+  // Existing links to the hidden guide still lead to the actual store information.
+  function routeStoreGuide() {
+    if (IS_WINTER_GIFT && location.hash === '#shintoko-guide') document.getElementById('store-shintoko')?.scrollIntoView({block: 'start'});
+  }
+  routeStoreGuide();
+  window.addEventListener('hashchange', routeStoreGuide);
+  window.addEventListener('load', routeStoreGuide, {once: true});
 
   // =========================================================
   // Workshops: store selector per card
@@ -3323,7 +3484,7 @@
   if (floatingGift) {
     floatingGift.addEventListener('click', (e) => {
       e.preventDefault();
-      const giftTab = document.querySelector('.product-tab[data-category="gift"]');
+      const giftTab = document.querySelector(`.product-tab[data-category="${IS_WINTER_GIFT ? 'winter' : 'gift'}"]`);
       if (giftTab && !giftTab.classList.contains('is-active')) {
         giftTab.click();
       }
