@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>出張ワークショップのお申し込み｜HASABA COFFEE ROASTERS®</title>
+  <meta name="description" content="企業・学校・地域の集まりに、コーヒーを学ぶ時間を。HASABA COFFEEの出張ワークショップ開催についてご相談いただけます。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://hasabacoffee.com/offsite-workshop/">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self'; img-src 'self'; connect-src https://workshop.hasabacoffee.com https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; form-action 'none'; object-src 'none'; base-uri 'none'">
+  <meta name="theme-color" content="#522c25">
+  <link rel="icon" href="../images/favicon.png" type="image/png">
+  <link rel="stylesheet" href="./form.css">
+  <script type="module" src="./form.mjs"></script>
+</head>
+<body>
+  <a class="skip-link" href="#application-form">申請フォームへ</a>
+  <div class="preview-banner" hidden aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="../index.html"><img src="../images/logo.png" alt="HASABA COFFEE ROASTERS" width="64" height="64"><span>HASABA COFFEE<br><small>ROASTERS®</small></span></a>
+    <a class="back-link" href="../index.html#workshop">本体サイトへ <span aria-hidden="true">↗</span></a>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-copy">
+        <p class="eyebrow">COFFEE, AT YOUR PLACE.</p>
+        <h1 id="page-title">いつもの場所を、<br>珈琲の学び場に。</h1>
+        <p class="lead">会社、学校、地域の集まりに。<br>香りを楽しみ、自分の手で淹れる、焙煎する。<br>HASABAのワークショップを、あなたの場所で。</p>
+        <div class="intro-notes"><span>出張ワークショップ 開催申請</span><p>日程や会場が未定でも、ご相談いただけます。<br>開催可否・内容・費用は、申請内容を確認後にご案内します。</p></div>
+      </div>
+      <figure class="intro-photo"><img src="../images/workshop-roast.jpg" alt="手焙煎器を使ってコーヒーを焙煎するワークショップの様子" width="1600" height="1066"><figcaption>香りが変わる。その瞬間を、一緒に。</figcaption></figure>
+    </section>
+    <div class="process"><ol aria-label="開催までの流れ"><li><strong>ご希望を申請</strong><span>主催者・開催内容をお知らせください</span></li><li><strong>内容を確認・ご相談</strong><span>日程・会場・費用を調整します</span></li><li><strong>条件に合意して開催決定</strong><span>申請だけで開催は確定しません</span></li></ol></div>
+    <div class="form-layout">
+      <aside class="form-aside"><div class="aside-card"><p class="eyebrow">REQUEST FORM</p><h2>開催のご希望を<br>お聞かせください。</h2><p>日程や会場名は「未定」で構いません。人数と地域は、おおよそのご希望をお聞かせください。</p><ol><li>開催について</li><li>主催者について</li><li>確認・同意</li></ol><p class="aside-small">すべての方が安心して参加できるよう、主催者情報と運営方針への同意をお願いしています。</p></div></aside>
+      <div class="form-panel">
+        <noscript><p class="error-summary">フォームの確認・送信にはJavaScriptが必要です。ブラウザーの設定で有効にするか、本体サイトの問い合わせ窓口をご利用ください。</p></noscript>
+        <form id="application-form" method="post" action="#" novalidate>
+          <div id="error-summary" class="error-summary" role="alert" tabindex="-1" hidden></div>
+          <fieldset class="form-section"><legend><span class="section-number">01</span><span>開催について</span></legend><p class="section-intro"><span class="required">必須</span> の項目を入力してください。出張料金は内容・場所に応じて個別にご案内します。</p>
+            <div class="field-grid">
+              <div class="field full"><label for="workshopType">希望するワークショップ <span class="required">必須</span></label><select id="workshopType" name="workshopType" required><option value="">選択してください</option><option value="roast">珈琲焙煎</option><option value="drip">ハンドドリップ</option><option value="consult">相談して決めたい</option></select></div>
+              <div class="field full"><label for="purpose">開催の目的・参加される方 <span class="required">必須</span></label><textarea id="purpose" name="purpose" required maxlength="1000" rows="3" placeholder="例：社内交流のため。コーヒーが好きな社員を中心に、初心者も参加予定です。"></textarea><span class="hint">参加者のお名前や個人情報は記入しないでください。</span></div>
+              <div class="field"><label for="desiredDates">希望日・時期 <span class="required">必須</span></label><input id="desiredDates" name="desiredDates" required maxlength="300" placeholder="例：12月の平日午後／未定"><span class="hint">候補が複数ある場合は併記してください。</span></div>
+              <div class="field"><label for="participants">参加人数の目安 <span class="required">必須</span></label><input id="participants" name="participants" type="number" min="1" max="9999" step="1" inputmode="numeric" required placeholder="例：10"><span class="hint">おおよその人数で構いません。対応人数はご相談のうえ決定します。</span></div>
+              <div class="field"><label for="prefecture">開催する都道府県 <span class="required">必須</span></label><select id="prefecture" name="prefecture" required><option value="">選択してください</option></select></div>
+              <div class="field"><label for="city">市区町村・地域 <span class="required">必須</span></label><input id="city" name="city" required maxlength="100" placeholder="例：所沢市／未定"></div>
+              <div class="field"><label for="venueName">会場名・施設名 <span class="hint">任意</span></label><input id="venueName" name="venueName" maxlength="200" placeholder="例：社内会議室／未定"><span class="hint">初回申請では詳細な住所は不要です。</span></div>
+              <div class="field"><label for="venueType">会場の環境 <span class="required">必須</span></label><select id="venueType" name="venueType" required><option value="">選択してください</option><option value="indoor">屋内</option><option value="outdoor">屋外</option><option value="undecided">未定・相談したい</option></select></div>
+            </div>
+          </fieldset>
+          <fieldset class="form-section"><legend><span class="section-number">02</span><span>主催者について</span></legend><p class="section-intro">開催の確認とご連絡に使用します。</p>
+            <div class="field-grid">
+              <div class="field"><label for="organizerType">主催者の区分 <span class="required">必須</span></label><select id="organizerType" name="organizerType" required><option value="">選択してください</option><option value="individual">個人</option><option value="company">法人・店舗</option><option value="group">団体・学校・その他</option></select></div>
+              <div class="field"><label for="organization">会社・団体名 <span id="organization-required" class="hint">法人・団体は必須</span></label><input id="organization" name="organization" maxlength="120" autocomplete="organization"></div>
+              <div class="field"><label for="name">ご担当者のお名前 <span class="required">必須</span></label><input id="name" name="name" required maxlength="80" autocomplete="name"></div>
+              <div class="field"><label for="occupation">職業・お仕事内容 <span class="required">必須</span></label><input id="occupation" name="occupation" required maxlength="160" placeholder="例：会社員（人事担当）、教員、自営業、学生"></div>
+              <div class="field full"><label for="businessActivity">主催者の事業・活動内容 <span class="required">必須</span></label><textarea id="businessActivity" name="businessActivity" required maxlength="500" rows="3" placeholder="例：地域の親睦サークルを運営しています。個人の場合は、普段の活動や今回の集まりについてご記入ください。"></textarea></div>
+              <div class="field full"><label for="website">公式サイト・活動紹介URL <span class="hint">任意</span></label><input id="website" name="website" type="url" maxlength="500" placeholder="https://" inputmode="url"></div>
+              <div class="field"><label for="email">メールアドレス <span class="required">必須</span></label><input id="email" name="email" type="email" required maxlength="254" autocomplete="email" inputmode="email"><span class="hint">開催のご相談は、こちらにご連絡します。</span></div>
+              <div class="field"><label for="phone">電話番号 <span class="hint">任意</span></label><input id="phone" name="phone" type="tel" maxlength="40" autocomplete="tel" placeholder="090-0000-0000"></div>
+              <div class="field full"><label for="notes">ご相談・補足 <span class="hint">任意</span></label><textarea id="notes" name="notes" maxlength="2000" rows="3" placeholder="ご予算の目安、会場設備、共同主催者がいる場合の団体名など、ご相談事項をお知らせください。"></textarea><span class="hint">身分証、口座情報、参加者名簿などは記入しないでください。</span></div>
+            </div>
+          </fieldset>
+          <fieldset class="form-section"><legend><span class="section-number">03</span><span>確認・同意</span></legend><p class="section-intro">安心して珈琲を楽しめる場づくりのため、以下のすべてにご同意ください。各項目は申請者による表明・誓約です。</p>
+            <div class="consent-list" id="consent-list"></div>
+            <details class="privacy-note" id="privacy-note"><summary>申請情報の取り扱い</summary><p>入力された氏名、連絡先、職業・事業内容、開催希望、申告・同意内容は、HASABA COFFEEが出張ワークショップの申請確認、開催可否・見積もりの検討、日程調整および連絡に利用します。広告・メールマガジンへの自動登録には使用しません。</p><p>申請対応に必要な担当者がメールで内容を確認します。法令に基づく場合を除き、同意なく第三者に提供しません。メール配信などの処理は、必要な範囲で外部サービスへ委託する場合があります。</p><p>申請情報は開催の調整・対応に必要な期間、安全に管理します。訂正・削除などのお申し出は公式LINEまたは店頭へご連絡ください。</p></details>
+          </fieldset>
+          <div class="form-actions"><p>申請は開催の確約ではありません。<br>内容を確認してから、日程・費用をご相談します。</p><button type="submit" class="button">申請内容を確認する <span aria-hidden="true">→</span></button><small>ご入力のメールアドレスへ担当者からご連絡します。</small></div>
+        </form>
+        <section id="review-panel" hidden aria-labelledby="review-title"><p class="eyebrow">REVIEW</p><h2 id="review-title" tabindex="-1">申請内容の確認</h2><p>入力内容をご確認のうえ、申請を送信してください。</p><div id="review-content"></div><div class="review-actions"><button id="back-to-form" type="button" class="button button-secondary">入力内容を修正する</button><button id="preview-complete" type="button" class="button" disabled>申請を送信する</button></div></section>
+        <section id="complete-panel" hidden aria-labelledby="complete-title"><div class="completion-card"><p class="eyebrow">APPLICATION</p><h2 id="complete-title" tabindex="-1">申請の送信結果</h2><p>申請の送信後に、受付状況をこちらに表示します。</p><p>申請だけで開催は確定しません。内容を確認のうえ、担当者からご連絡します。</p><button id="return-to-review" type="button" class="button button-secondary">確認画面に戻る</button></div></section>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><a href="../index.html">HASABA COFFEE ROASTERS®</a><span>珈琲は、生鮮飲料。</span><small>© HASABA COFFEE ROASTERS®</small></footer>
+</body>
+</html>

@@ -208,6 +208,13 @@
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
 
 <style>
+  /* Offsite workshop request — local draft; no publication performed. */
+  .offsite-invitation { margin-top: 38px; padding: 34px 38px; display: flex; align-items: center; justify-content: space-between; gap: 28px; background: #522c25; color: #fff9f2; border-radius: 12px; }
+  .offsite-invitation .section-label { color: #e5bd98; }
+  .offsite-invitation h3 { font-size: clamp(22px, 3vw, 30px); line-height: 1.5; margin: 8px 0 10px; }
+  .offsite-invitation p { font-size: 14px; line-height: 1.9; opacity: .9; }
+  .offsite-invitation .btn { flex-shrink: 0; }
+  @media (max-width: 680px) { .offsite-invitation { padding: 28px 22px; flex-direction: column; align-items: stretch; } .offsite-invitation .btn { text-align: center; } }
   /* =========================================================
      Design Tokens — Little Amps "Warm Vinyl Cafe"
      ========================================================= */
@@ -1959,6 +1966,7 @@
         <h5 class="mobile-nav-heading">Experience / 体験・店舗</h5>
         <ul>
           <li><a href="#workshop">ワークショップ</a></li>
+          <li><a href="offsite-workshop/">出張ワークショップの申請</a></li>
           <li><a href="#stores">店舗一覧</a></li>
           <li><a href="#retail">お取り扱い店</a></li>
         </ul>
@@ -2495,6 +2503,10 @@
       </article>
 
     </div>
+    <div class="offsite-invitation" id="offsite-workshop">
+      <div><span class="section-label">Coffee, at your place.</span><h3>あなたの場所で、珈琲の体験を。</h3><p>会社・学校・地域の集まりに。出張ワークショップの開催をご相談いただけます。<br>日程・内容・費用は、ご希望を伺ってからご案内します。</p></div>
+      <a href="offsite-workshop/" class="btn btn-mellow btn-arrow">出張ワークショップを申し込む</a>
+    </div>
   </div>
 </section>
 
@@ -2856,6 +2868,7 @@
           <h5>Experience</h5>
           <ul>
             <li><a href="#workshop">ワークショップ</a></li>
+            <li><a href="offsite-workshop/">出張ワークショップの申請</a></li>
             <li><a href="#stores">店舗一覧</a></li>
             <li><a href="#column">焙煎・抽出のいろは</a></li>
           </ul>
